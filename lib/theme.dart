@@ -39,18 +39,22 @@ AppBarTheme appTheme() {
 
 
 TextTheme textTheme() {
-  return TextTheme(
-    headline1: const TextStyle(
-      fontSize: 25,
-      fontFamily: 'cafe24_KR',
+  return const TextTheme(
+    headline1: TextStyle(
+      fontSize: 30,
     ),
-    headline2: const TextStyle(
+    headline2: TextStyle(
+      fontSize: 28,
+    ),
+    headline5: TextStyle(
+      fontSize: 24,
+    ),
+    headline6: TextStyle(
       fontSize: 22,
-      fontFamily: 'cafe24_KR',
     ),
-    subtitle1: const TextStyle(color: Colors.black, fontSize: 22),
-    subtitle2: const TextStyle(color: Colors.black, fontSize: 20),
-    bodyText1: const TextStyle(color: Colors.black, fontSize: 18),
-    bodyText2: const TextStyle(color: Colors.black, fontSize: 16),
+    subtitle1: TextStyle(color: Colors.black, fontSize: 20),
+    subtitle2: TextStyle(color: Colors.black, fontSize: 18),
+    bodyText1: TextStyle(color: Colors.black, fontSize: 16),
+    bodyText2: TextStyle(color: Colors.black, fontSize: 14),
   );
 }

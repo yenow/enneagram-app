@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
+import 'package:enneagram/data/models/question.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
@@ -9,10 +11,15 @@ import '../../data/models/user.dart';
 class AppController extends GetxController {
   static AppController get to => Get.find();
   final user = User(
-    userToken: 'init',
-    enneagramResults: [],
-    createdAt: DateTime.now()
-  ).obs;
+          userToken: 'init',
+          enneagramResult: EnneagramResult(
+              enneagramType: 0,
+              scores: [],
+              questionType: QuestionType.simple,
+              createdAt: DateTime.now()),
+          enneagramResults: [],
+          createdAt: DateTime.now())
+      .obs;
 
   final userRef = FirebaseFirestore.instance
       .collection('user')
@@ -24,9 +31,9 @@ class AppController extends GetxController {
 
   @override
   void onInit() async {
-    super.onInit();
     await initSharedPreferences();
     await initUser();
+    super.onInit();
   }
 
   Future<void> initSharedPreferences() async {
@@ -54,11 +61,11 @@ class AppController extends GetxController {
       prefs.setString('userToken', userToken);
 
       user(createdUser);
-
     } else {
       logger.d('userToken : $userToken');
 
-      List<QueryDocumentSnapshot<User>> users = await userRef.where('userToken', isEqualTo: userToken)
+      List<QueryDocumentSnapshot<User>> users = await userRef
+          .where('userToken', isEqualTo: userToken)
           .get()
           .then((snapshot) => snapshot.docs);
 

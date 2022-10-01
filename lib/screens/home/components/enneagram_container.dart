@@ -1,14 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:enneagram/data/models/enneagram.dart';
+import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../main.dart';
 
 enum Shape { vertical, horizontal }
 
 class EnneagramContainer extends StatelessWidget {
   final Shape shape;
+  final int enneagramType;
 
-  const EnneagramContainer({Key? key, required this.shape}) : super(key: key);
+  const EnneagramContainer(
+      {Key? key, required this.shape, required this.enneagramType})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +32,11 @@ class EnneagramContainer extends StatelessWidget {
           border: Border.all(color: Colors.grey, width: 1),
           borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Flexible(
-              flex: 8,
+              flex: 12,
               fit: FlexFit.loose,
               child: buildEnneagramVerticalContainer()),
           SizedBox(
@@ -55,10 +63,11 @@ class EnneagramContainer extends StatelessWidget {
 
   Column buildEnneagramVerticalContainer() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Flexible(
-            flex: 1,
+            flex: 2,
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 return Padding(
@@ -67,7 +76,7 @@ class EnneagramContainer extends StatelessWidget {
                         maxLines: 1,
                         maxFontSize: 50,
                         minFontSize: 5,
-                        style: Get.textTheme.headline5));
+                        style: Get.textTheme.headline6));
               },
             )),
         Flexible(
@@ -76,22 +85,22 @@ class EnneagramContainer extends StatelessWidget {
               builder: (BuildContext context, BoxConstraints constraints) {
                 return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                    child: AutoSizeText('2022-09-20 15:00',
+                    child: AutoSizeText(formatter.format(AppController.to.user.value.enneagramResult!.createdAt),
                         maxLines: 1,
-                        maxFontSize: 20,
+                        maxFontSize: 13,
                         minFontSize: 10,
-                        style: Get.textTheme.bodySmall));
+                        style: Get.textTheme.bodyText2));
               },
             )),
         const SizedBox(
           width: 10,
         ),
         Flexible(
-          flex: 5,
+          flex: 4,
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Image.asset(
-              "assets/images/enneagram/cat.png",
+              enneagramMap[enneagramType]!.imageUrl!,
               // height: 70,
               // width: 70,
             ),
@@ -115,8 +124,8 @@ class EnneagramContainer extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Text('4유형(예술가)',
-            style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
+        Text(enneagramMap[enneagramType]!.getName(),
+            style: Get.theme.textTheme.subtitle2, textAlign: TextAlign.left),
         const SizedBox(
           height: 5,
         ),
@@ -132,8 +141,8 @@ class EnneagramContainer extends StatelessWidget {
                 width: constraints.maxWidth,
                 height: constraints.maxHeight,
                 child: AutoSizeText(
-                  '표현력이 있고, 극적이며, 자기 내면에 빠져 있으며, 변덕스럽다.',
-                  style: Get.textTheme.bodyLarge,
+                  enneagramMap[enneagramType]!.shortDescription,
+                  style: Get.textTheme.bodyText1,
                   maxLines: 2,
                 ),
               ),
@@ -146,9 +155,9 @@ class EnneagramContainer extends StatelessWidget {
 
   Container buildHorizontalContainer() {
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
+      // decoration: BoxDecoration(
+      //     border: Border.all(color: Colors.grey, width: 1),
+      //     borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -156,8 +165,8 @@ class EnneagramContainer extends StatelessWidget {
               flex: 5,
               fit: FlexFit.loose,
               child: buildEnneagramHorizontalContainer()),
-          SizedBox(
-            height: 10,
+          const SizedBox(
+            height: 5,
           ),
           Flexible(
             flex: 2,
@@ -167,6 +176,9 @@ class EnneagramContainer extends StatelessWidget {
                   onPressed: () {
                     Get.toNamed(MyRoute.testSelectScreen);
                   },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.grey)
+                  ),
                   child: Text('자세히 알아보기')),
             ),
           ),
@@ -190,14 +202,14 @@ class EnneagramContainer extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Image.asset(
-              "assets/images/enneagram/cat.png",
+              enneagramMap[enneagramType]!.imageUrl!,
               // height: 70,
               // width: 70,
             ),
           ),
         ),
         const SizedBox(
-          width: 10,
+          width: 8,
         ),
         Flexible(
             flex: 5,
@@ -207,35 +219,38 @@ class EnneagramContainer extends StatelessWidget {
     );
   }
 
-  Column buildEnneagramHorizontalDescription() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const SizedBox(
-          height: 5,
-        ),
-        Text('4유형',
-            style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
-        const SizedBox(
-          height: 5,
-        ),
-        Flexible(
-          fit: FlexFit.loose,
-          child: LayoutBuilder(builder: (context, constraints) {
-            print('maxHeight : ${constraints.maxHeight}');
-            print('maxWidth : ${constraints.maxWidth}');
+  Widget buildEnneagramHorizontalDescription() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(
+            height: 5,
+          ),
+          Text(enneagramMap[enneagramType]!.getName(),
+              style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
+          const SizedBox(
+            height: 5,
+          ),
+          Flexible(
+            fit: FlexFit.loose,
+            child: LayoutBuilder(builder: (context, constraints) {
+              print('maxHeight : ${constraints.maxHeight}');
+              print('maxWidth : ${constraints.maxWidth}');
 
-            return SizedBox(
-              width: constraints.maxWidth,
-              height: constraints.maxHeight,
-              child: const AutoSizeText(
-                '표현력이 있고, 극적이며, 자기 내면에 빠져 있으며, 변덕스럽다.',
-                maxLines: 2,
-              ),
-            );
-          }),
-        ),
-      ],
+              return SizedBox(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+                child: AutoSizeText(
+                  enneagramMap[enneagramType]!.shortDescription,
+                  maxLines: 2,
+                ),
+              );
+            }),
+          ),
+        ],
+      ),
     );
   }
 }

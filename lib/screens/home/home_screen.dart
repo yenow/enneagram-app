@@ -18,170 +18,175 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Enneagram'),
-        ),
-        drawer: const CustomDrawer(),
-        body: Container(
-          color: Colors.black12,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Flexible(
-                  fit: FlexFit.loose,
-                  flex: 10,
-                  child: EnneagramContainer(shape: Shape.vertical),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: ElevatedButton(
+    return Obx(() =>
+      SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Enneagram'),
+          ),
+          drawer: CustomDrawer(enneagramType: AppController.to.user.value.enneagramResult!.enneagramType),
+          body: Container(
+            color: Colors.black12,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Flexible(
+                    fit: FlexFit.loose,
+                    flex: 14,
+                    child: EnneagramContainer(
+                      shape: Shape.vertical,
+                      enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(MyRoute.testSelectScreen);
+                        },
+                        child: Text('에니어그램 알아보기')),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: ElevatedButton(
                       onPressed: () {
                         Get.toNamed(MyRoute.testSelectScreen);
                       },
-                      child: Text('에니어그램 알아보기')),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(MyRoute.testSelectScreen);
-                    },
-                    child: Text('에니어그램 테스트하기'),
+                      child: Text('에니어그램 테스트하기'),
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      AppController.to.removeUserToken();
-                    },
-                    child: Text('토큰 지우기'),
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: ElevatedButton(
+                  Flexible(
+                    flex: 1,
+                    child: ElevatedButton(
                       onPressed: () {
-                        /*
-                        // 데이터 삽입
-
-                        final collection = FirebaseFirestore.instance.collection('FirstDemo');
-                        collection.add({
-                          "name":"name",
-                          "description":"abcde"
-                        });*/
-                        // var future = firstDemos.doc(documentId).get();
-                        // future.then((value) {
-                        //   value.get(Sec)
-                        //   print(value.data());
-                        // });
-
-                        CollectionReference firstDemos =
-                            FirebaseFirestore.instance.collection('FirstDemo');
-                        String documentId = "nf7KvvmRa6gM59CVnx4";
-                        firstDemos
-                            .doc(documentId)
-                            .get()
-                            .then((DocumentSnapshot documentSnapshot) {
-                          logger.d("DocumentSnapshot documentSnapshot");
-                          // documentSnapshot.reference.set({
-                          //   "test" : "test"
-                          // });
-                          // documentSnapshot.reference.collection("SecondDemo").add({
-                          //   "test" : "test"
-                          // });
-
-                          EnneagramResult enneagramResult = EnneagramResult(
-                              enneagramType: 1,
-                              questionType: QuestionType.detail135,
-                              scores: [
-                                Score(enneagramType: 1, score: 1),
-                                Score(enneagramType: 2, score: 2),
-                              ],
-                              createdAt: DateTime.now());
-
-                          logger.d(enneagramResult.toJson());
-
-                          final enneagramResultRef = documentSnapshot.reference
-                              .collection("enneagramResult")
-                              .withConverter<EnneagramResult>(
-                                  fromFirestore: (snapshot, _) =>
-                                      EnneagramResult.fromJson(
-                                          snapshot.data()!),
-                                  toFirestore: (enneagramResult, _) =>
-                                      enneagramResult.toJson());
-
-                          enneagramResultRef.add(enneagramResult);
-                        });
-
-                        firstDemos
-                            .doc(documentId)
-                            .get()
-                            .then((DocumentSnapshot documentSnapshot) {
-                          if (documentSnapshot.exists) {
-                            print(
-                                'documentSnapshot.metadata = ${documentSnapshot.metadata}');
-                            print(
-                                'documentSnapshot.id = ${documentSnapshot.id}');
-                            print(
-                                'documentSnapshot.data() = ${documentSnapshot.data()}');
-                            print(
-                                'documentSnapshot.get("name") = ${documentSnapshot.get("name")}');
-                            print(
-                                'documentSnapshot.get("description") = ${documentSnapshot.get("description")}');
-
-                            CollectionReference secondDemos = documentSnapshot
-                                .reference
-                                .collection("SecondDemo");
-                            String documentId2 = "51uLfULylLd6JmMxlXAQ";
-                            secondDemos
-                                .doc(documentId2)
-                                .get()
-                                .then((DocumentSnapshot documentSnapshot2) {
-                              if (documentSnapshot2.exists) {
-                                print(
-                                    'documentSnapshot2.metadata = ${documentSnapshot2.metadata}');
-                                print(
-                                    'documentSnapshot2.data() = ${documentSnapshot2.data()}');
-                                print(
-                                    'documentSnapshot2.get("name") = ${documentSnapshot2.get("name")}');
-                                print(
-                                    'documentSnapshot2.get("description") = ${documentSnapshot2.get("description")}');
-                              }
-                            });
-                          }
-                        });
-
-                        /*
-                        // 데이터 가져오기
-                        firstDemos.get().then((value) {
-                          print(value.size);
-                          print(value.metadata);
-                          print(value.docs);
-                          var elementAt = value.docs.elementAt(0).data();
-                          print(elementAt);
-                        });*/
+                        AppController.to.removeUserToken();
                       },
-                      child: const Text('파이어베이스 테스트 버튼')),
-                ),
-                Flexible(flex: 4, child: Container()),
-              ],
+                      child: Text('토큰 지우기'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          /*
+                          // 데이터 삽입
+
+                          final collection = FirebaseFirestore.instance.collection('FirstDemo');
+                          collection.add({
+                            "name":"name",
+                            "description":"abcde"
+                          });*/
+                          // var future = firstDemos.doc(documentId).get();
+                          // future.then((value) {
+                          //   value.get(Sec)
+                          //   print(value.data());
+                          // });
+
+                          CollectionReference firstDemos =
+                              FirebaseFirestore.instance.collection('FirstDemo');
+                          String documentId = "nf7KvvmRa6gM59CVnx4";
+                          firstDemos
+                              .doc(documentId)
+                              .get()
+                              .then((DocumentSnapshot documentSnapshot) {
+                            logger.d("DocumentSnapshot documentSnapshot");
+                            // documentSnapshot.reference.set({
+                            //   "test" : "test"
+                            // });
+                            // documentSnapshot.reference.collection("SecondDemo").add({
+                            //   "test" : "test"
+                            // });
+
+                            EnneagramResult enneagramResult = EnneagramResult(
+                                enneagramType: 1,
+                                questionType: QuestionType.detail135,
+                                scores: [
+                                  Score(enneagramType: 1, score: 1),
+                                  Score(enneagramType: 2, score: 2),
+                                ],
+                                createdAt: DateTime.now());
+
+                            logger.d(enneagramResult.toJson());
+
+                            final enneagramResultRef = documentSnapshot.reference
+                                .collection("enneagramResult")
+                                .withConverter<EnneagramResult>(
+                                    fromFirestore: (snapshot, _) =>
+                                        EnneagramResult.fromJson(
+                                            snapshot.data()!),
+                                    toFirestore: (enneagramResult, _) =>
+                                        enneagramResult.toJson());
+
+                            enneagramResultRef.add(enneagramResult);
+                          });
+
+                          firstDemos
+                              .doc(documentId)
+                              .get()
+                              .then((DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists) {
+                              print(
+                                  'documentSnapshot.metadata = ${documentSnapshot.metadata}');
+                              print(
+                                  'documentSnapshot.id = ${documentSnapshot.id}');
+                              print(
+                                  'documentSnapshot.data() = ${documentSnapshot.data()}');
+                              print(
+                                  'documentSnapshot.get("name") = ${documentSnapshot.get("name")}');
+                              print(
+                                  'documentSnapshot.get("description") = ${documentSnapshot.get("description")}');
+
+                              CollectionReference secondDemos = documentSnapshot
+                                  .reference
+                                  .collection("SecondDemo");
+                              String documentId2 = "51uLfULylLd6JmMxlXAQ";
+                              secondDemos
+                                  .doc(documentId2)
+                                  .get()
+                                  .then((DocumentSnapshot documentSnapshot2) {
+                                if (documentSnapshot2.exists) {
+                                  print(
+                                      'documentSnapshot2.metadata = ${documentSnapshot2.metadata}');
+                                  print(
+                                      'documentSnapshot2.data() = ${documentSnapshot2.data()}');
+                                  print(
+                                      'documentSnapshot2.get("name") = ${documentSnapshot2.get("name")}');
+                                  print(
+                                      'documentSnapshot2.get("description") = ${documentSnapshot2.get("description")}');
+                                }
+                              });
+                            }
+                          });
+
+                          /*
+                          // 데이터 가져오기
+                          firstDemos.get().then((value) {
+                            print(value.size);
+                            print(value.metadata);
+                            print(value.docs);
+                            var elementAt = value.docs.elementAt(0).data();
+                            print(elementAt);
+                          });*/
+                        },
+                        child: const Text('파이어베이스 테스트 버튼')),
+                  ),
+                  Flexible(flex: 2, child: Container()),
+                ],
+              ),
             ),
           ),
         ),
@@ -242,7 +247,7 @@ class HomeScreen extends StatelessWidget {
           width: 10,
         ),
         Flexible(
-            flex: 5,
+            flex: 3,
             fit: FlexFit.tight,
             child: buildEnneagramTypeDescription()),
       ],
