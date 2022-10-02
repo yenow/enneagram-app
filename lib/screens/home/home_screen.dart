@@ -13,18 +13,51 @@ import '../../constants.dart';
 import '../../data/models/question.dart';
 import '../../data/models/score.dart';
 
+final Future<String> calculation = Future<String>.delayed(
+  Duration(seconds: 2),
+  () => 'Y',
+);
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() =>
-      SafeArea(
+    logger.d('build HomeScreen');
+
+    // return buildBody();
+
+    return FutureBuilder<String>(
+        future: AppController.to.initUser(),
+        // future: calculation,
+        // initialData: AppController.to.initUser(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data! == 'Y') {
+              return buildBody();
+            } else {
+              return const Text('error');
+            }
+          } else if (snapshot.hasError) {
+            return const Text('error');
+          }
+          return const Center(
+              child: CircularProgressIndicator(
+            color: Colors.grey,
+          ));
+        });
+  }
+
+  Widget buildBody() {
+    return Obx(
+      () => SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Enneagram'),
           ),
-          drawer: CustomDrawer(enneagramType: AppController.to.user.value.enneagramResult!.enneagramType),
+          drawer: CustomDrawer(
+              enneagramType:
+                  AppController.to.user.value.enneagramResult!.enneagramType),
           body: Container(
             color: Colors.black12,
             child: Padding(
@@ -83,21 +116,22 @@ class HomeScreen extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {
                           /*
-                          // 데이터 삽입
+                            // 데이터 삽입
 
-                          final collection = FirebaseFirestore.instance.collection('FirstDemo');
-                          collection.add({
-                            "name":"name",
-                            "description":"abcde"
-                          });*/
+                            final collection = FirebaseFirestore.instance.collection('FirstDemo');
+                            collection.add({
+                              "name":"name",
+                              "description":"abcde"
+                            });*/
                           // var future = firstDemos.doc(documentId).get();
                           // future.then((value) {
                           //   value.get(Sec)
                           //   print(value.data());
                           // });
 
-                          CollectionReference firstDemos =
-                              FirebaseFirestore.instance.collection('FirstDemo');
+                          CollectionReference firstDemos = FirebaseFirestore
+                              .instance
+                              .collection('FirstDemo');
                           String documentId = "nf7KvvmRa6gM59CVnx4";
                           firstDemos
                               .doc(documentId)
@@ -122,7 +156,8 @@ class HomeScreen extends StatelessWidget {
 
                             logger.d(enneagramResult.toJson());
 
-                            final enneagramResultRef = documentSnapshot.reference
+                            final enneagramResultRef = documentSnapshot
+                                .reference
                                 .collection("enneagramResult")
                                 .withConverter<EnneagramResult>(
                                     fromFirestore: (snapshot, _) =>
@@ -173,14 +208,14 @@ class HomeScreen extends StatelessWidget {
                           });
 
                           /*
-                          // 데이터 가져오기
-                          firstDemos.get().then((value) {
-                            print(value.size);
-                            print(value.metadata);
-                            print(value.docs);
-                            var elementAt = value.docs.elementAt(0).data();
-                            print(elementAt);
-                          });*/
+                            // 데이터 가져오기
+                            firstDemos.get().then((value) {
+                              print(value.size);
+                              print(value.metadata);
+                              print(value.docs);
+                              var elementAt = value.docs.elementAt(0).data();
+                              print(elementAt);
+                            });*/
                         },
                         child: const Text('파이어베이스 테스트 버튼')),
                   ),
@@ -203,7 +238,7 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Flexible(flex: 5, fit: FlexFit.loose, child: buildEnneagramType()),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Flexible(
@@ -214,10 +249,10 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     Get.toNamed(MyRoute.testSelectScreen);
                   },
-                  child: Text('자세히 알아보기')),
+                  child: const Text('자세히 알아보기')),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ],

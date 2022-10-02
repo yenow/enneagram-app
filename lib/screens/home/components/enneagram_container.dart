@@ -1,11 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:enneagram/data/models/enneagram.dart';
+import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constants.dart';
+import '../../../data/models/user.dart';
 import '../../../main.dart';
+import 'date_drop_down.dart';
 
 enum Shape { vertical, horizontal }
 
@@ -85,11 +89,20 @@ class EnneagramContainer extends StatelessWidget {
               builder: (BuildContext context, BoxConstraints constraints) {
                 return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                    child: AutoSizeText(formatter.format(AppController.to.user.value.enneagramResult!.createdAt),
-                        maxLines: 1,
-                        maxFontSize: 13,
-                        minFontSize: 10,
-                        style: Get.textTheme.bodyText2));
+                    child: DateDropDown(
+                      list: AppController.to.user.value.enneagramResults.map((e) => dateFormatter.format(e.createdAt)).toList(),
+                      callback: (String date) {
+                        logger.d('click date = $date');
+                        EnneagramResult enneagramResult = AppController.to.user.value.enneagramResults.where((element) => date == dateFormatter.format(element.createdAt)).first;
+                        User newUser = User(
+                            userToken: AppController.to.user.value.userToken,
+                            createdAt: AppController.to.user.value.createdAt,
+                            enneagramResults: AppController.to.user.value.enneagramResults,
+                            enneagramResult: enneagramResult);
+                        AppController.to.user(newUser);
+                      },
+                    )
+                );
               },
             )),
         const SizedBox(
@@ -142,7 +155,7 @@ class EnneagramContainer extends StatelessWidget {
                 height: constraints.maxHeight,
                 child: AutoSizeText(
                   enneagramMap[enneagramType]!.shortDescription,
-                  style: Get.textTheme.bodyText1,
+                  style: Get.textTheme.bodyText2,
                   maxLines: 2,
                 ),
               ),

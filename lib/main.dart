@@ -11,7 +11,6 @@ import 'firebase_options.dart';
 
 import 'get/binding/init_binding.dart';
 
-final DateFormat formatter = DateFormat('yyyy-MM-dd hh:mm');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

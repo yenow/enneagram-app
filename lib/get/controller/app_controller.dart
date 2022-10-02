@@ -17,7 +17,13 @@ class AppController extends GetxController {
               scores: [],
               questionType: QuestionType.simple,
               createdAt: DateTime.now()),
-          enneagramResults: [],
+          enneagramResults: [
+            EnneagramResult(
+                enneagramType: 0,
+                scores: [],
+                questionType: QuestionType.simple,
+                createdAt: DateTime.now())
+          ],
           createdAt: DateTime.now())
       .obs;
 
@@ -29,19 +35,14 @@ class AppController extends GetxController {
 
   late SharedPreferences prefs;
 
-  @override
-  void onInit() async {
-    await initSharedPreferences();
-    await initUser();
-    super.onInit();
-  }
-
   Future<void> initSharedPreferences() async {
     logger.d('initSharedPreferences() execute');
     prefs = await SharedPreferences.getInstance();
   }
 
-  Future<void> initUser() async {
+  Future<String> initUser() async {
+    await initSharedPreferences();
+
     logger.d('initUser() execute');
     String? userToken = prefs.getString('userToken');
 
@@ -73,6 +74,7 @@ class AppController extends GetxController {
       user(findUser);
     }
     logger.d('user = $user');
+    return 'Y';
   }
 
   String getUserToken() {

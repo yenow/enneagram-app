@@ -48,6 +48,7 @@ dependencies:
   json_annotation: ^4.7.0
   json_serializable: ^6.4.0
   intl: ^0.17.0
+  flutter_native_splash: ^2.2.10+1
 
 dev_dependencies:
   flutter_test:
@@ -71,8 +72,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -118,3 +117,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#42a5f5"
