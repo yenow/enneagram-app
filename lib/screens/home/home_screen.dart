@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants.dart';
-import '../../data/models/question.dart';
-import '../../data/models/score.dart';
+import '../../data/models/question/question.dart';
+import '../../data/models/enneagram_result/score.dart';
 
 final Future<String> calculation = Future<String>.delayed(
   Duration(seconds: 2),

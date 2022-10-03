@@ -1,6 +1,6 @@
 
 
-import 'question.dart';
+import 'question/question.dart';
 
 class EnneagramQuestion {
   QuestionType questionType;

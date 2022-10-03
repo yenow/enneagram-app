@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants.dart';
-import '../../../data/models/question.dart';
+import '../../../data/models/question/question.dart';
 
 class TestPage extends StatefulWidget {
   final Question question;

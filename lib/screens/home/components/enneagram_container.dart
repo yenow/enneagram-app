@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:enneagram/data/models/enneagram.dart';
+import 'package:enneagram/data/models/enneagram/enneagram.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:enneagram/route.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants.dart';
-import '../../../data/models/user.dart';
+import '../../../data/models/user/user.dart';
 import '../../../main.dart';
 import 'date_drop_down.dart';
 
@@ -154,7 +154,7 @@ class EnneagramContainer extends StatelessWidget {
                 width: constraints.maxWidth,
                 height: constraints.maxHeight,
                 child: AutoSizeText(
-                  enneagramMap[enneagramType]!.shortDescription,
+                  enneagramMap[enneagramType]!.secondDescription,
                   style: Get.textTheme.bodyText2,
                   maxLines: 2,
                 ),
@@ -256,7 +256,7 @@ class EnneagramContainer extends StatelessWidget {
                 width: constraints.maxWidth,
                 height: constraints.maxHeight,
                 child: AutoSizeText(
-                  enneagramMap[enneagramType]!.shortDescription,
+                  enneagramMap[enneagramType]!.secondDescription,
                   maxLines: 2,
                 ),
               );

@@ -1,5 +1,5 @@
 import 'package:enneagram/constants.dart';
-import 'package:enneagram/data/models/question.dart';
+import 'package:enneagram/data/models/question/question.dart';
 import 'package:enneagram/get/controller/test_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

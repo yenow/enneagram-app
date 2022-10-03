@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
-import 'package:enneagram/data/models/question.dart';
+import 'package:enneagram/data/models/question/question.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../constants.dart';
-import '../../data/models/user.dart';
+import '../../data/models/user/user.dart';
 
 class AppController extends GetxController {
   static AppController get to => Get.find();

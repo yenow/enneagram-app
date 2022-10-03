@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enneagram/constants.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
-import 'package:enneagram/data/models/question.dart';
+import 'package:enneagram/data/models/question/question.dart';
 import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/models/score.dart';
-import '../../data/models/user.dart';
+import '../../data/models/enneagram_result/score.dart';
+import '../../data/models/user/user.dart';
 import '../../utilities/dialog.dart';
 import 'app_controller.dart';
 

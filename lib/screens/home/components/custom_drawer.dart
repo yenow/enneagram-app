@@ -1,4 +1,4 @@
-import 'package:enneagram/data/models/enneagram.dart';
+import 'package:enneagram/data/models/enneagram/enneagram.dart';
 import 'package:enneagram/screens/home/components/enneagram_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

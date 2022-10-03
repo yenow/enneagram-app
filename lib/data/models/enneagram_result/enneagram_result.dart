@@ -1,5 +1,5 @@
-import 'package:enneagram/data/models/question.dart';
-import 'package:enneagram/data/models/score.dart';
+import 'package:enneagram/data/models/question/question.dart';
+import 'package:enneagram/data/models/enneagram_result/score.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'enneagram_result.g.dart';
