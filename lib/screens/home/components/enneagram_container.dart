@@ -40,7 +40,7 @@ class EnneagramContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Flexible(
-              flex: 12,
+              flex: 11,
               fit: FlexFit.loose,
               child: buildEnneagramVerticalContainer()),
           SizedBox(
@@ -166,40 +166,35 @@ class EnneagramContainer extends StatelessWidget {
     );
   }
 
-  Container buildHorizontalContainer() {
-    return Container(
-      // decoration: BoxDecoration(
-      //     border: Border.all(color: Colors.grey, width: 1),
-      //     borderRadius: const BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Flexible(
-              flex: 5,
-              fit: FlexFit.loose,
-              child: buildEnneagramHorizontalContainer()),
-          const SizedBox(
-            height: 5,
+  Widget buildHorizontalContainer() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Flexible(
+            flex: 5,
+            fit: FlexFit.loose,
+            child: buildEnneagramHorizontalContainer()),
+        const SizedBox(
+          height: 5,
+        ),
+        Flexible(
+          flex: 2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(MyRoute.testSelectScreen);
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Get.theme.colorScheme.primary)
+                ),
+                child: Text('${enneagramMap[enneagramType]!.getName()} 알아보기')),
           ),
-          Flexible(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton(
-                  onPressed: () {
-                    Get.toNamed(MyRoute.testSelectScreen);
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.grey)
-                  ),
-                  child: Text('자세히 알아보기')),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
     );
   }
 

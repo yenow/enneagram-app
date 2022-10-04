@@ -12,14 +12,15 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: Get.theme.canvasColor,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              decoration: const BoxDecoration(color: Colors.blue),
+              decoration: BoxDecoration(color: Get.theme.colorScheme.background),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 10),
                   Expanded(

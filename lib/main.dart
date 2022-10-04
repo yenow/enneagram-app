@@ -28,6 +28,8 @@ class MyApp extends StatelessWidget {
       getPages: MyRoute.getRoutes(),
       initialBinding: InitBinding(),
       theme: theme(),
+      darkTheme: ThemeData.dark(),
+      // themeMode: ThemeMode.dark,
       home: const HomeScreen(),
     );
   }
