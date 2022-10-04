@@ -21,6 +21,8 @@ ThemeData theme() {
     ),
     primaryColor: Colors.purple.shade300,
 
+    tabBarTheme: tabBarTheme(),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all(Size.infinite),
@@ -34,6 +36,19 @@ ThemeData theme() {
         ),
       )
     ),
+  );
+}
+
+TabBarTheme tabBarTheme() {
+  return TabBarTheme(
+    indicator: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(
+          color: Colors.deepPurple.shade200,
+          width: 4
+        )
+      )
+    )
   );
 }
 

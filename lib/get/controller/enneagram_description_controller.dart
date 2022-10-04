@@ -8,8 +8,8 @@ import '../../data/models/enneagram_description/enneagram_description.dart';
 class EnneagramDescriptionController extends GetxController {
   static EnneagramDescriptionController get to => Get.find();
   final enneagramDescription = EnneagramDescription(enneagramIntroduction: '', enneagramTypeDescription: {}).obs;
-  final HtmlEditorController htmlEditorController = HtmlEditorController();
 
+  final HtmlEditorController htmlEditorController = HtmlEditorController();
   final enneagramDescriptionRef = FirebaseFirestore.instance
       .collection('EnneagramDescription')
       .withConverter<EnneagramDescription>(

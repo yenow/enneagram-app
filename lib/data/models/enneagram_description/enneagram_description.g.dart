@@ -12,7 +12,7 @@ EnneagramDescription _$EnneagramDescriptionFromJson(
       enneagramIntroduction: json['enneagramIntroduction'] as String,
       enneagramTypeDescription:
           (json['enneagramTypeDescription'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(int.parse(k), e as String),
+        (k, e) => MapEntry(int.parse(k), Map<String, String>.from(e as Map)),
       ),
     );
 

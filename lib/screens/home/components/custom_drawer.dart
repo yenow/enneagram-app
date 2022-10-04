@@ -4,6 +4,8 @@ import 'package:enneagram/screens/home/components/enneagram_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constants.dart';
+
 class CustomDrawer extends StatelessWidget {
   final int enneagramType;
   const CustomDrawer({Key? key, required this.enneagramType}) : super(key: key);
@@ -42,35 +44,42 @@ class CustomDrawer extends StatelessWidget {
             title: Text('에니어그램 9가지 유형', style: Get.textTheme.bodyText2,),
             children: <Widget>[
               for (var i = 1; i <= 9; i++)
-                ListTile(
-                  title: Row(
-                    children: [
-                      Row(
-                        // textBaseline: TextBaseline.alphabetic,
+                GestureDetector(
+                  child: ListTile(
+                    title: InkWell(
+                      onTap: () {
+                        logger.d('tap');
+                        Get.toNamed(MyRoute.enneagramTypeDescription, arguments: i);
+                      },
+                      child: Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                            child: Image.asset(
-                              enneagramMap[i]!.imageUrl!,
-                              height: 20,
-                              width: 20,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            // EnneagramController.to.enneagram[i]!.getFullName(),
-                            '$i유형',
-                            style: Get.textTheme.bodyText2,
+                          Row(
+                            // textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 5),
+                                child: Image.asset(
+                                  enneagramMap[i]!.imageUrl!,
+                                  height: 20,
+                                  width: 20,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                enneagramMap[i]!.getName(),
+                                style: Get.textTheme.bodyText2,
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
+                    onTap: () {
+                      Get.back();
+                    },
                   ),
-                  onTap: () {
-                    Get.back();
-                  },
                 ),
             ],
           ),

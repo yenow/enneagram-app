@@ -6,7 +6,7 @@ part 'enneagram_description.g.dart';
 @JsonSerializable(explicitToJson: true)
 class EnneagramDescription {
   String enneagramIntroduction;
-  Map<int, String> enneagramTypeDescription;
+  Map<int, Map<String,String>> enneagramTypeDescription;
 
   EnneagramDescription({required this.enneagramIntroduction, required this.enneagramTypeDescription});
 
