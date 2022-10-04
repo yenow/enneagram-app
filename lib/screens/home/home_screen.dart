@@ -27,13 +27,13 @@ class HomeScreen extends StatelessWidget {
 
     // return buildBody();
 
-    return FutureBuilder<String>(
-        future: AppController.to.initUser(),
+    return FutureBuilder<bool>(
+        future: AppController.to.initData(),
         // future: calculation,
         // initialData: AppController.to.initUser(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data! == 'Y') {
+            if (snapshot.data!) {
               return buildBody();
             } else {
               return const Text('error');
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
       () => SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Enneagram'),
+            title: const Text('에니어그램',),
           ),
           drawer: CustomDrawer(
               enneagramType:
@@ -272,7 +272,7 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Image.asset(
-              "assets/images/enneagram/cat.png",
+              "assets/images/enneagram_type_description/cat.png",
               // height: 70,
               // width: 70,
             ),

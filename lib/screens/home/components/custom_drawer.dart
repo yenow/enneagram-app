@@ -1,4 +1,5 @@
 import 'package:enneagram/data/models/enneagram/enneagram.dart';
+import 'package:enneagram/route.dart';
 import 'package:enneagram/screens/home/components/enneagram_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,34 +30,20 @@ class CustomDrawer extends StatelessWidget {
                 ],
               )),
           ListTile(
+            leading: const Icon(Icons.home),
             title: Text('에니어그램 개요', style: Get.textTheme.bodyText2,),
-            leading: const Icon(Icons.apps_rounded),
+            onTap: () {
+              Get.toNamed(MyRoute.enneagramIntroduction);
+            },
           ),
-          // ExpansionTile(
-          //   title: Text('에니어그램 개요'),
-          //   leading: Icon(Icons.apps_rounded),
-          // ),
           ExpansionTile(
-            // childrenPadding: EdgeInsets.zero,
-            // tilePadding: EdgeInsets.zero,
-
-            title: Text('에니어그램 9가지 유형', style: Get.textTheme.bodyText2,),
             leading: const Icon(Icons.apps_rounded),
+            title: Text('에니어그램 9가지 유형', style: Get.textTheme.bodyText2,),
             children: <Widget>[
               for (var i = 1; i <= 9; i++)
                 ListTile(
                   title: Row(
                     children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 20),
-                      //   child: Image(
-                      //     image: AssetImage(
-                      //         EnneagramController.to.enneagram[i]!.imagePath),
-                      //     width: 20,
-                      //     height: 20,
-                      //     fit: BoxFit.fill,
-                      //   ),
-                      // ),
                       Row(
                         // textBaseline: TextBaseline.alphabetic,
                         children: [
@@ -82,11 +69,16 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     Get.back();
-                    // Map map = {"enneagramType": i};
-                    // Get.toNamed(WaiRoutes.enneagramType, arguments: map);
                   },
                 ),
             ],
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: Text('설정', style: Get.textTheme.bodyText2,),
+            onTap: () {
+              Get.toNamed(MyRoute.settingScreen);
+            },
           )
         ],
       ),

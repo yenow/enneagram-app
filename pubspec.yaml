@@ -49,6 +49,8 @@ dependencies:
   json_serializable: ^6.4.0
   intl: ^0.17.0
   flutter_native_splash: ^2.2.10+1
+  html_editor_enhanced: ^2.5.0
+  flutter_html: ^3.0.0-alpha.6
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/data/models/question/question.dart';
+import 'package:enneagram/get/controller/enneagram_description_controller.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
@@ -40,7 +41,13 @@ class AppController extends GetxController {
     prefs = await SharedPreferences.getInstance();
   }
 
-  Future<String> initUser() async {
+  Future<bool> initData() async {
+    await initUser();
+    await EnneagramDescriptionController.to.initEnneagramDescription();
+    return true;
+  }
+
+  Future<void> initUser() async {
     await initSharedPreferences();
 
     logger.d('initUser() execute');
@@ -74,7 +81,6 @@ class AppController extends GetxController {
       user(findUser);
     }
     logger.d('user = $user');
-    return 'Y';
   }
 
   String getUserToken() {

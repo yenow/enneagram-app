@@ -34,7 +34,7 @@ AppBarTheme appTheme() {
       // backgroundColor: Colors.transparent,
       elevation: 0.0,
       titleTextStyle: TextStyle(
-          fontSize: 22, fontFamily: 'cafe24_KR', color: Colors.black54));
+          fontSize: 20, fontFamily: 'cafe24SsurroundAir_KR', color: Colors.white));
 }
 
 
