@@ -48,7 +48,6 @@ class CustomDrawer extends StatelessWidget {
                   child: ListTile(
                     title: InkWell(
                       onTap: () {
-                        logger.d('tap');
                         Get.toNamed(MyRoute.enneagramTypeDescription, arguments: i);
                       },
                       child: Row(

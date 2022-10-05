@@ -20,7 +20,6 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
-
   @override
   void setState(VoidCallback fn) {
     super.setState(fn);
@@ -36,14 +35,22 @@ class _TestPageState extends State<TestPage> {
           child: Container(
             margin: const EdgeInsets.all(10),
             padding: const EdgeInsets.all(10),
-            // decoration: BoxDecoration(
-            //     border: Border.all(color: Colors.grey, width: 1),
-            //     borderRadius: const BorderRadius.all(Radius.circular(10))),
             child: Column(
               children: [
                 Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    child: LinearProgressIndicator(
+                      value: TestController.to.getProgressPercent(),
+                      valueColor:
+                          AlwaysStoppedAnimation(Get.theme.colorScheme.primary),
+                    ),
+                  ),
+                ),
+                Flexible(
                   fit: FlexFit.loose,
-                  flex: 10,
+                  flex: 8,
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -54,75 +61,8 @@ class _TestPageState extends State<TestPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Flexible(
-                            fit: FlexFit.tight,
-                            flex: 1,
-                            child: LayoutBuilder(builder: (BuildContext context,
-                                BoxConstraints constraints) {
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.skip_previous,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      TestController.to.goPrevPage(widget.questionIndex);
-                                    },
-                                    icon: const Icon(
-                                      Icons.navigate_before,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '${widget.questionIndex + 1} / ${TestController.to.questions.length}',
-                                        style: Get.textTheme.headline6,
-                                      )),
-                                  // 다음 페이지로
-                                  IconButton(
-                                    onPressed: () {
-                                      TestController.to.goNextPage(widget.questionIndex);
-                                    },
-                                    icon: const Icon(
-                                      Icons.navigate_next,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.skip_next,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            })),
-                        // Flexible(
-                        //     child: Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Text(
-                        //     '1 / 10',
-                        //     style: Get.textTheme.headline6,
-                        //   ),
-                        // )),
-                        Flexible(
-                            fit: FlexFit.loose,
-                            flex: 7,
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                '${widget.questionIndex + 1}. ${widget.question.question}',
-                                style: Get.textTheme.headline6,
-                              ),
-                            )),
+                        buildHeader(),
+                        buildQuestion(),
                       ],
                     ),
                   ),
@@ -140,6 +80,74 @@ class _TestPageState extends State<TestPage> {
     );
   }
 
+  Flexible buildQuestion() {
+    return Flexible(
+        fit: FlexFit.tight,
+        flex: 5,
+        child: Container(
+          // alignment: Alignment.center,
+          padding: const EdgeInsets.all(15),
+          child: Text(
+            '${widget.questionIndex + 1}. ${widget.question.question}',
+            style: Get.textTheme.headline6,
+          ),
+        ));
+  }
+
+  Flexible buildHeader() {
+    return Flexible(
+        fit: FlexFit.tight,
+        flex: 1,
+        child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.skip_previous,
+                  color: Colors.grey,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  TestController.to.goPrevPage(widget.questionIndex);
+                },
+                icon: const Icon(
+                  Icons.navigate_before,
+                  color: Colors.grey,
+                ),
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    // '${widget.questionIndex + 1}',
+                    '${widget.questionIndex + 1} / ${TestController.to.questions.length}',
+                    style: Get.textTheme.headline6,
+                  )),
+              // 다음 페이지로
+              IconButton(
+                onPressed: () {
+                  TestController.to.goNextPage(widget.questionIndex);
+                },
+                icon: const Icon(
+                  Icons.navigate_next,
+                  color: Colors.grey,
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.skip_next,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          );
+        }));
+  }
+
   Flexible buildFlexibleButton(int buttonNumber) {
     return Flexible(
         flex: 1,
@@ -153,15 +161,15 @@ class _TestPageState extends State<TestPage> {
               TestController.to.clickScore(buttonNumber);
             },
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith((states) {
-                Question elementAt = TestController.to.questions.elementAt(widget.questionIndex);
-                if (widget.question.score == buttonNumber) {
-                  logger.d('widget.question.score = ${widget.question.score}');
-                  return Colors.grey;
-                }
-                return Colors.blue;
-              })
-            ),
+                backgroundColor: MaterialStateProperty.resolveWith((states) {
+              Question elementAt =
+                  TestController.to.questions.elementAt(widget.questionIndex);
+              if (widget.question.score == buttonNumber) {
+                logger.d('widget.question.score = ${widget.question.score}');
+                return Get.theme.colorScheme.secondary;
+              }
+              return Get.theme.colorScheme.primary;
+            })),
             child: Text(getButtonString(buttonNumber)),
           ),
         ));

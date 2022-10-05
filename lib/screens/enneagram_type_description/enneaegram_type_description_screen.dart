@@ -49,10 +49,10 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
   Widget buildBody() {
     return TabBarView(
       children: [
-        buildPage(''),
-        buildPage(''),
-        buildPage(''),
-        buildPage(''),
+        buildPage('basic'),
+        buildPage('etc1'),
+        buildPage('etc2'),
+        buildPage('wings'),
       ],
     );
   }
@@ -63,7 +63,7 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Html(
           shrinkWrap: true,
-          data: EnneagramDescriptionController.to.enneagramDescription.value.enneagramIntroduction,
+          data: EnneagramDescriptionController.to.enneagramDescription.value.enneagramTypeDescription![enneagramType]![type],
           style: htmlStyleMap,
         ),
       ),

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-const Color customMagenta300 = Color(0xfff8836c);
-
 ThemeData theme() {
   return ThemeData(
     appBarTheme: appTheme(),
     scaffoldBackgroundColor: Colors.white,
     textTheme: textTheme(),
     fontFamily: 'cafe24SsurroundAir_KR',
-    // colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xB446C7FF), ),
-    // colorScheme: ColorScheme(
-    //   background: Colors.purple, brightness: Brightness(),
-    //
-    // ),
-    colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: Colors.deepPurple,
-        // primaryColorDark: Colors.grey,
-        // backgroundColor: Colors.purple.shade200,
-        // accentColor: Colors.purple.shade200
+    colorScheme: const ColorScheme(
+      primary: Color(0xFF7033B9),
+      onPrimary: Colors.white,
+      background: Color(0xFFA990C7),
+      onBackground: Colors.white,
+      secondary: Color(0xFF3A0F65),
+      onSecondary: Colors.white,
+      error: Colors.redAccent,
+      onError: Colors.white,
+      surface: Colors.white,
+      onSurface: Colors.black,
+      brightness: Brightness.light,
     ),
     primaryColor: Colors.purple.shade300,
 
@@ -26,9 +26,6 @@ ThemeData theme() {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all(Size.infinite),
-        // textStyle: MaterialStateProperty.all(GoogleFonts.jua()),
-        // backgroundColor: MaterialStateProperty.all(WaiColors.mainColor),
-        // overlayColor: MaterialStateProperty.all(WaiColors.mainColor),
         elevation: MaterialStateProperty.all(1),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -74,9 +71,11 @@ TextTheme textTheme() {
     ),
     headline5: TextStyle(
       fontSize: 24,
+      wordSpacing: 1.2,
     ),
     headline6: TextStyle(
       fontSize: 22,
+      wordSpacing: 1.2,
     ),
     subtitle1: TextStyle(color: Colors.black, fontSize: 20),
     subtitle2: TextStyle(color: Colors.black, fontSize: 18),

@@ -19,7 +19,7 @@ class TestController extends GetxController {
 
   // const
   final PageController pageController = PageController();
-  final Duration duration = const Duration(milliseconds: 300);
+  final Duration duration = const Duration(milliseconds: 200);
   final Curve curve = Curves.linear;
 
   @override
@@ -105,13 +105,26 @@ class TestController extends GetxController {
     }
   }
 
+  double getProgressPercent() {
+    int length = questions.length;
+
+    int cnt = 0;
+    for (Question element in questions) {
+      if (element.score != null) {
+        cnt++;
+      }
+    }
+
+    return cnt/length;
+  }
+
+  /// 답변 클릭시
   void clickScore(int buttonNumber) {
     index(index.value + 1);
     logger.d('current index = ${index.value} ${questions.length}');
 
     if (index.value < questions.length) {
-      TestController.to.pageController
-          .nextPage(duration: duration, curve: curve);
+      TestController.to.pageController.nextPage(duration: duration, curve: curve);
     } else if (index.value == questions.length) {
       completeDetailTest();
     }
@@ -122,6 +135,7 @@ class TestController extends GetxController {
     questions([]);
   }
 
+  /// 테스트 완료시
   void completeDetailTest() async {
     // check data
     for (Question question in questions) {
@@ -181,22 +195,4 @@ class TestController extends GetxController {
 
     Get.toNamed(MyRoute.root);
   }
-
-  // getEnneagramResult() {
-  //   String userToken = AppController.to.getUserToken();
-  //   FirebaseFirestore.instance
-  //       .collection('user')
-  //       .where('userToken', isEqualTo: userToken)
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.first.reference
-  //         .collection('enneagramResult')
-  //         .get()
-  //         .then((QuerySnapshot querySnapshot) {
-  //       if (querySnapshot.docs.isNotEmpty) {
-  //         for (var element in querySnapshot.docs) {}
-  //       }
-  //     });
-  //   });
-  // }
 }
