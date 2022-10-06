@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:enneagram/common/components/block_text.dart';
 import 'package:enneagram/data/models/enneagram/enneagram.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/get/controller/app_controller.dart';
@@ -24,10 +25,44 @@ class EnneagramContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (shape == Shape.vertical) {
-      return buildVerticalContainer();
+      return AppController.to.user.value.enneagramResult!.enneagramType == 0
+          ? buildNoTypeContainer()
+          : buildVerticalContainer();
     } else {
-      return buildHorizontalContainer();
+      return AppController.to.user.value.enneagramResult!.enneagramType == 0
+          ? Container()
+          : buildHorizontalContainer();
     }
+  }
+
+  Widget buildNoTypeContainer() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 1),
+          borderRadius: const BorderRadius.all(Radius.circular(10))),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Column(
+            children: [
+              Center(child: Text('나의 에니어그램은?', style: Get.theme.textTheme.headline5,)),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Image.asset(
+                  'assets/images/enneagram/pawprint.png',
+                ),
+              ),
+              Center(
+                  child: Text('테스트를 진행해주세요!', style: Get.theme.textTheme.subtitle1,)
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Container buildVerticalContainer() {
@@ -43,7 +78,7 @@ class EnneagramContainer extends StatelessWidget {
               flex: 11,
               fit: FlexFit.loose,
               child: buildEnneagramVerticalContainer()),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Flexible(
@@ -54,10 +89,10 @@ class EnneagramContainer extends StatelessWidget {
                   onPressed: () {
                     Get.toNamed(MyRoute.testSelectScreen);
                   },
-                  child: Text('자세히 알아보기')),
+                  child: const Text('자세히 알아보기')),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ],
@@ -80,29 +115,39 @@ class EnneagramContainer extends StatelessWidget {
                         maxLines: 1,
                         maxFontSize: 50,
                         minFontSize: 5,
-                        style: Get.textTheme.headline6));
+                        style: Get.textTheme.headline5));
               },
             )),
         Flexible(
             flex: 1,
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
+                if (AppController.to.user.value.enneagramResults.isEmpty) {
+                  return Container();
+                }
+
                 return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                     child: DateDropDown(
-                      list: AppController.to.user.value.enneagramResults.map((e) => dateFormatter.format(e.createdAt)).toList(),
+                      list: AppController.to.user.value.enneagramResults
+                          .map((e) => dateFormatter.format(e.createdAt))
+                          .toList(),
                       callback: (String date) {
                         logger.d('click date = $date');
-                        EnneagramResult enneagramResult = AppController.to.user.value.enneagramResults.where((element) => date == dateFormatter.format(element.createdAt)).first;
+                        EnneagramResult enneagramResult = AppController
+                            .to.user.value.enneagramResults
+                            .where((element) =>
+                                date == dateFormatter.format(element.createdAt))
+                            .first;
                         User newUser = User(
                             userToken: AppController.to.user.value.userToken,
                             createdAt: AppController.to.user.value.createdAt,
-                            enneagramResults: AppController.to.user.value.enneagramResults,
+                            enneagramResults:
+                                AppController.to.user.value.enneagramResults,
                             enneagramResult: enneagramResult);
                         AppController.to.user(newUser);
                       },
-                    )
-                );
+                    ));
               },
             )),
         const SizedBox(
@@ -137,8 +182,10 @@ class EnneagramContainer extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Text(enneagramMap[enneagramType]!.getName(),
-            style: Get.theme.textTheme.subtitle2, textAlign: TextAlign.left),
+        Block(
+          child: Text(enneagramMap[enneagramType]!.getName(),
+              style: Get.theme.textTheme.subtitle2, textAlign: TextAlign.left),
+        ),
         const SizedBox(
           height: 5,
         ),
@@ -186,8 +233,8 @@ class EnneagramContainer extends StatelessWidget {
                   Get.toNamed(MyRoute.testSelectScreen);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Get.theme.colorScheme.primary)
-                ),
+                    backgroundColor: MaterialStateProperty.all(
+                        Get.theme.colorScheme.primary)),
                 child: Text('${enneagramMap[enneagramType]!.getName()} 알아보기')),
           ),
         ),

@@ -53,7 +53,9 @@ class HomeScreen extends StatelessWidget {
       () => SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('에니어그램',),
+            title: const Text(
+              '에니어그램',
+            ),
           ),
           drawer: CustomDrawer(
               enneagramType:
@@ -67,10 +69,11 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Flexible(
                     fit: FlexFit.loose,
-                    flex: 12,
+                    flex: 11,
                     child: EnneagramContainer(
                       shape: Shape.vertical,
-                      enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
+                      enneagramType: AppController
+                          .to.user.value.enneagramResult!.enneagramType,
                     ),
                   ),
                   const SizedBox(
@@ -80,9 +83,9 @@ class HomeScreen extends StatelessWidget {
                     flex: 1,
                     child: ElevatedButton(
                         onPressed: () {
-                          Get.toNamed(MyRoute.testSelectScreen);
+                          Get.toNamed(MyRoute.enneagramIntroduction);
                         },
-                        child: Text('에니어그램 알아보기')),
+                        child: const Text('에니어그램이란?')),
                   ),
                   const SizedBox(
                     height: 10,

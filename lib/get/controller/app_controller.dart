@@ -55,20 +55,7 @@ class AppController extends GetxController {
 
     if (userToken == null) {
       userToken = const Uuid().v1();
-
-      User createdUser = User(
-        userToken: userToken,
-        createdAt: DateTime.now(),
-        enneagramResults: [],
-      );
-
-      // save firebase
-      userRef.add(createdUser);
-
-      // save SharedPreferences
-      prefs.setString('userToken', userToken);
-
-      user(createdUser);
+      createUser(userToken);
     } else {
       logger.d('userToken : $userToken');
 
@@ -77,10 +64,37 @@ class AppController extends GetxController {
           .get()
           .then((snapshot) => snapshot.docs);
 
-      User findUser = users.first.data();
-      user(findUser);
+      if (users.isNotEmpty) {
+        User findUser = users.first.data();
+        user(findUser);
+      } else {
+        userToken = const Uuid().v1();
+        createUser(userToken);
+      }
     }
     logger.d('user = $user');
+  }
+
+  void createUser(String userToken) {
+    User createdUser = User(
+      userToken: userToken,
+      createdAt: DateTime.now(),
+      enneagramResult: EnneagramResult(
+        enneagramType: 0,
+        scores: [],
+        questionType: QuestionType.simple,
+        createdAt: DateTime.now()
+      ),
+      enneagramResults: [],
+    );
+
+    // save firebase
+    userRef.add(createdUser);
+
+    // save SharedPreferences
+    prefs.setString('userToken', userToken);
+
+    user(createdUser);
   }
 
   String getUserToken() {

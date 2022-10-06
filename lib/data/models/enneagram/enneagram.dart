@@ -15,6 +15,7 @@ class Enneagram {
       required this.imageUrl});
 
   String getName() {
+
     return '$name($enneagramType유형)';
   }
 }
@@ -23,8 +24,8 @@ final Map<int, Enneagram> enneagramMap = {
   0: Enneagram(
       enneagramType: 0,
       name: '없음',
-      subName: '개혁가',
-      firstDescription: '이상적이고 이상적인 유형',
+      subName: '없음',
+      firstDescription: '테스트가 필요합니다.',
       secondDescription: '테스트가 필요합니다.',
       imageUrl: 'assets/images/enneagram/pawprint.png'),
   1: Enneagram(

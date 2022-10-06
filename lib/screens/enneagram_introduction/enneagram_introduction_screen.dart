@@ -25,19 +25,19 @@ class EnneagramIntroductionScreen extends StatelessWidget {
       title: const AutoSizeText(
         '에니어그램 소개',
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-          child: IconButton(
-            onPressed: () {
-              Get.toNamed(MyRoute.enneagramIntroductionRegister);
-            },
-            icon: const Icon(
-              Icons.edit_sharp,
-            ),
-          ),
-        )
-      ],
+      // actions: [
+      //   Padding(
+      //     padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+      //     child: IconButton(
+      //       onPressed: () {
+      //         Get.toNamed(MyRoute.enneagramIntroductionRegister);
+      //       },
+      //       icon: const Icon(
+      //         Icons.edit_sharp,
+      //       ),
+      //     ),
+      //   )
+      // ],
     );
   }
 

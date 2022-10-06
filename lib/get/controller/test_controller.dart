@@ -15,7 +15,7 @@ class TestController extends GetxController {
   static TestController get to => Get.find();
   final questions = <Question>[].obs;
   final currentQuestion = Rx<Question>;
-  final index = 0.obs;
+  final pageIndex = 0.obs;
 
   // const
   final PageController pageController = PageController();
@@ -79,17 +79,44 @@ class TestController extends GetxController {
     return result;
   }
 
-  void goNextPage(int questionIndex) {
-    Question question = questions.elementAt(index.value);
+  void goPrevTenPage() {
+    int index = pageIndex.value - 10;
 
-    logger.d('current index = ${index.value} ${questions.length}');
+    if (index < 0) index = 0;
+
+    pageController.jumpToPage(index);
+    pageIndex(index);
+  }
+
+  void goNextTenPage() {
+    int index = pageIndex.value + 10;
+
+    while(questions.elementAt(index).score == null) {
+      index--;
+    }
+    index++;
+
+    if (pageIndex.value == questions.length - 1) {
+      alertDialog('마지막 페이지 입니다.');
+    } else if (index == pageIndex.value)  {
+      alertDialog('문항을 선택해야 합니다.');
+    }
+
+    pageController.jumpToPage(index);
+    pageIndex(index);
+  }
+
+  void goNextPage(int questionIndex) {
+    Question question = questions.elementAt(pageIndex.value);
+
+    logger.d('current index = ${pageIndex.value} ${questions.length}');
 
     if (questionIndex == questions.length - 1) {
       alertDialog('마지막 페이지 입니다.');
     } else if (question.score == null) {
       alertDialog('문항을 선택해야합니다.');
     } else {
-      index(index.value + 1);
+      pageIndex(pageIndex.value + 1);
       TestController.to.pageController.nextPage(
           duration: TestController.to.duration, curve: TestController.to.curve);
     }
@@ -99,7 +126,7 @@ class TestController extends GetxController {
     if (questionIndex == 0) {
       alertDialog('첫번쨰 페이지 입니다.');
     } else {
-      index(index.value - 1);
+      pageIndex(pageIndex.value - 1);
       TestController.to.pageController.previousPage(
           duration: TestController.to.duration, curve: TestController.to.curve);
     }
@@ -115,17 +142,17 @@ class TestController extends GetxController {
       }
     }
 
-    return cnt/length;
+    return cnt / length;
   }
 
   /// 답변 클릭시
   void clickScore(int buttonNumber) {
-    index(index.value + 1);
-    logger.d('current index = ${index.value} ${questions.length}');
+    pageIndex(pageIndex.value + 1);
+    logger.d('current index = ${pageIndex.value} ${questions.length}');
 
-    if (index.value < questions.length) {
+    if (pageIndex.value < questions.length) {
       TestController.to.pageController.nextPage(duration: duration, curve: curve);
-    } else if (index.value == questions.length) {
+    } else if (pageIndex.value == questions.length) {
       completeDetailTest();
     }
   }

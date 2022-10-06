@@ -22,7 +22,7 @@ class EnneagramDescriptionController extends GetxController {
 
     EnneagramDescription findEnneagramDescription = await EnneagramDescriptionController
         .to.enneagramDescriptionRef.doc('bRXk3h0Saaew1BpigH9w').get().then((snapshot) => snapshot.data()!);
-    logger.d('findEnneagramDescription = $findEnneagramDescription');
+    // logger.d('findEnneagramDescription = $findEnneagramDescription');
 
     // htmlEditorController.setText(findEnneagramDescription.enneagramIntroduction);
 

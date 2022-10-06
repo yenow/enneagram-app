@@ -34,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
               )),
           ListTile(
             leading: const Icon(Icons.home),
-            title: Text('에니어그램 개요', style: Get.textTheme.bodyText2,),
+            title: Text('에니어그램이란?', style: Get.textTheme.bodyText2,),
             onTap: () {
               Get.toNamed(MyRoute.enneagramIntroduction);
             },

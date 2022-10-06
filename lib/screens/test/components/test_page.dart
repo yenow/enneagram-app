@@ -50,7 +50,7 @@ class _TestPageState extends State<TestPage> {
                 ),
                 Flexible(
                   fit: FlexFit.loose,
-                  flex: 8,
+                  flex: 6,
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -104,9 +104,11 @@ class _TestPageState extends State<TestPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  TestController.to.goPrevTenPage();
+                },
                 icon: const Icon(
-                  Icons.skip_previous,
+                  Icons.undo,
                   color: Colors.grey,
                 ),
               ),
@@ -115,7 +117,7 @@ class _TestPageState extends State<TestPage> {
                   TestController.to.goPrevPage(widget.questionIndex);
                 },
                 icon: const Icon(
-                  Icons.navigate_before,
+                  Icons.west,
                   color: Colors.grey,
                 ),
               ),
@@ -132,14 +134,16 @@ class _TestPageState extends State<TestPage> {
                   TestController.to.goNextPage(widget.questionIndex);
                 },
                 icon: const Icon(
-                  Icons.navigate_next,
+                  Icons.east,
                   color: Colors.grey,
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  TestController.to.goNextTenPage();
+                },
                 icon: const Icon(
-                  Icons.skip_next,
+                  Icons.redo,
                   color: Colors.grey,
                 ),
               ),
