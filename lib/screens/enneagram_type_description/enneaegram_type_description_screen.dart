@@ -1,5 +1,7 @@
+import 'package:enneagram/screens/enneagram_type_description/components/enneagram_webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../constants.dart';
 import '../../data/models/enneagram/enneagram.dart';
@@ -14,17 +16,15 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: DefaultTabController(
-        length: 4,
-        child: Scaffold(
+        child: DefaultTabController(
+      length: 4,
+      child: Scaffold(
           appBar: AppBar(
             title: Text(enneagramMap[enneagramType]!.getName()),
             bottom: buildTabBar(),
           ),
-          body: buildBody()
-        ),
-      )
-    );
+          body: buildBody()),
+    ));
   }
 
   TabBar buildTabBar() {
@@ -49,24 +49,17 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
   Widget buildBody() {
     return TabBarView(
       children: [
-        buildPage('basic'),
-        buildPage('etc1'),
-        buildPage('etc2'),
-        buildPage('wings'),
+        buildPage('main'),
+        buildPage('good'),
+        buildPage('person'),
+        buildPage('wing'),
       ],
     );
   }
 
   Widget buildPage(String type) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: SingleChildScrollView(
-        child: Html(
-          shrinkWrap: true,
-          data: EnneagramDescriptionController.to.enneagramDescription.value.enneagramTypeDescription![enneagramType]![type],
-          style: htmlStyleMap,
-        ),
-      ),
+    return EnneagramWebView(
+      url: 'http://ysy.dothome.co.kr/type$enneagramType/$type.html',
     );
   }
 }

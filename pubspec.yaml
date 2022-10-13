@@ -51,6 +51,7 @@ dependencies:
   flutter_native_splash: ^2.2.10+1
   html_editor_enhanced: ^2.5.0
   flutter_html: ^3.0.0-alpha.6
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

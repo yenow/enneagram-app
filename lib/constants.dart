@@ -15,27 +15,55 @@ Map<String, Style> htmlStyleMap = {
       fontFamily: 'cafe24SsurroundAir_KR',
       fontSize: FontSize(Get.textTheme.bodyText1!.fontSize!),
       padding: const EdgeInsets.all(1),
+      margin: Margins(
+          bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
       wordSpacing: 1.0,
-      lineHeight: const LineHeight(1.4)
-  ),
+      lineHeight: const LineHeight(1.4)),
   "h2": Style(
-      fontFamily: 'cafe24SsurroundAir_KR',
-      fontSize: FontSize(Get.textTheme.headline5!.fontSize!)),
+    fontFamily: 'cafe24SsurroundAir_KR',
+    fontSize: FontSize(Get.textTheme.headline5!.fontSize!),
+    margin: Margins(
+        bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
+  ),
   "h3": Style(
+    fontFamily: 'cafe24SsurroundAir_KR',
+    fontSize: FontSize(Get.textTheme.headline6!.fontSize!),
+    padding: const EdgeInsets.symmetric(vertical: 10),
+    margin: Margins(
+        bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
+  ),
+  "h4": Style(
       fontFamily: 'cafe24SsurroundAir_KR',
-      fontSize: FontSize(Get.textTheme.headline6!.fontSize!)),
-  "h4": Style(fontFamily: 'cafe24SsurroundAir_KR', fontSize: FontSize(20)),
-  "h5": Style(fontFamily: 'cafe24SsurroundAir_KR', fontSize: FontSize(18)),
-  "h6": Style(fontFamily: 'cafe24SsurroundAir_KR', fontSize: FontSize(16)),
-  "blockquote": Style(),
-  "hr": Style(
-      height: Height(1.0),
-      lineHeight: const LineHeight(1.0),
+      fontSize: FontSize(20),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       margin: Margins(
           bottom: Margin(0),
           left: Margin(0),
           right: Margin(0),
           top: Margin(0))),
+  "h5": Style(
+    fontFamily: 'cafe24SsurroundAir_KR',
+    fontSize: FontSize(18),
+    padding: const EdgeInsets.symmetric(vertical: 6),
+    margin: Margins(
+        bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
+  ),
+  "h6": Style(
+    fontFamily: 'cafe24SsurroundAir_KR',
+    fontSize: FontSize(16),
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    margin: Margins(
+        bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
+  ),
+  "blockquote": Style(),
+  "hr": Style(
+      height: Height(1.0),
+      lineHeight: const LineHeight(1.0),
+      margin: Margins(
+          bottom: Margin(3),
+          left: Margin(0),
+          right: Margin(0),
+          top: Margin(3))),
   "li": Style(
     fontFamily: 'cafe24SsurroundAir_KR',
     fontSize: FontSize(Get.textTheme.bodyText1!.fontSize!),

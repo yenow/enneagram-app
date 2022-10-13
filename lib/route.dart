@@ -1,4 +1,5 @@
 import 'package:enneagram/get/controller/test_controller.dart';
+import 'package:enneagram/screens/enneagram_detail_description/enneagram_detail_description.dart';
 import 'package:enneagram/screens/enneagram_introduction/enneagram_introduction_register_screen.dart';
 import 'package:enneagram/screens/enneagram_introduction/enneagram_introduction_screen.dart';
 import 'package:enneagram/screens/enneagram_type_description/enneaegram_type_description_screen.dart';
@@ -23,6 +24,7 @@ class MyRoute {
   static const String enneagramIntroduction = '/enneagramIntroduction';
   static const String enneagramIntroductionRegister = '/enneagramIntroductionRegister';
   static const String enneagramTypeDescription = '/enneagramTypeDescription';
+  static const String enneagramDetailDescription = '/enneagramDetailDescription';
   static const String detailTestScreen = '/detailTestScreen';
   static const String settingScreen = '/settingScreen';
 
@@ -34,8 +36,11 @@ class MyRoute {
       GetPage(name: settingScreen, page: () => const SettingScreen()),
       GetPage(name: enneagramTypeDescription, page: () {
         int enneagramType = Get.arguments;
-
         return EnneagramTypeDescriptionScreen(enneagramType: enneagramType);
+      }),
+     GetPage(name: enneagramDetailDescription, page: () {
+        int enneagramType = Get.arguments;
+        return EnneagramDetailDescription(enneagramType: enneagramType);
       }),
       GetPage(
           name: enneagramIntroduction,
