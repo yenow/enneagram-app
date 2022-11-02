@@ -32,7 +32,7 @@ class TestSelectScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Flexible(
-                      flex: 15,
+                      flex: 20,
                       child: Container(
                         margin: const EdgeInsets.symmetric(vertical: 5),
                         padding: const EdgeInsets.all(10),
@@ -40,58 +40,19 @@ class TestSelectScreen extends StatelessWidget {
                             border: Border.all(color: Colors.grey, width: 1),
                             borderRadius:
                             const BorderRadius.all(Radius.circular(10))),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.error_outline,
-                                  size: 30,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  '테스트시 주의사항',
-                                  style: Get.textTheme.headline5,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                              width: double.infinity,
-                            ),
-                            ListView(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              children: notificationList.map((notification) {
-                                int index = notificationList.indexOf(notification) + 1;
-
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5),
-                                  child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text('$index. $notification',
-                                          style: Get.textTheme.bodyText1)),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ),
+                        child: buildTestPrecautions(),
                       )),
-                  Flexible(
-                    flex: 2,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            // Get.toNamed(MyRoute.testSelectScreen);
-                          },
-                          child: const Text('간단테스트')),
-                    ),
-                  ),
+                  // Flexible(
+                  //   flex: 2,
+                  //   child: Container(
+                  //     padding: EdgeInsets.symmetric(vertical: 5),
+                  //     child: ElevatedButton(
+                  //         onPressed: () {
+                  //           // Get.toNamed(MyRoute.testSelectScreen);
+                  //         },
+                  //         child: const Text('간단테스트')),
+                  //   ),
+                  // ),
                   Flexible(
                     flex: 2,
                     child: Container(
@@ -121,5 +82,52 @@ class TestSelectScreen extends StatelessWidget {
                 ],
               ),
             )));
+  }
+
+  Column buildTestPrecautions() {
+    return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          buildTestPrecautionTitle(),
+                          const SizedBox(
+                            height: 20,
+                            width: double.infinity,
+                          ),
+                          ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            children: notificationList.map((notification) {
+                              int index = notificationList.indexOf(notification) + 1;
+
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 5),
+                                child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text('$index. $notification',
+                                        style: Get.textTheme.bodyText1)),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      );
+  }
+
+  Row buildTestPrecautionTitle() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(
+          Icons.error_outline,
+          size: 30,
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        Text(
+          '테스트시 주의사항',
+          style: Get.textTheme.headline5,
+        ),
+      ],
+    );
   }
 }

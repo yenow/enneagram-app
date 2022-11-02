@@ -2,6 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../enneagram_result/enneagram_result.dart';
+import '../enneagram_result/score.dart';
 
 part 'user.g.dart';
 

@@ -1,12 +1,10 @@
 
 import 'package:enneagram/data/models/enneagram/enneagram.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 
-import '../../constants.dart';
-import '../../get/controller/enneagram_description_controller.dart';
-import 'components/barchart_sample.dart';
+import '../enneagram_type_description/components/enneagram_webview.dart';
+import 'components/enneagram_chart.dart';
 
 class EnneagramDetailDescription extends StatelessWidget {
   final int enneagramType;
@@ -16,7 +14,7 @@ class EnneagramDetailDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: DefaultTabController(
-          length: 4,
+          length: 5,
           child: Scaffold(
               appBar: AppBar(
                 title: Text(enneagramMap[enneagramType]!.getName()),
@@ -54,25 +52,11 @@ class EnneagramDetailDescription extends StatelessWidget {
     return TabBarView(
       children: [
         buildAnalysisPage(),
-        buildPage('basic'),
-        buildPage('etc1'),
-        buildPage('etc2'),
-        buildPage('wings'),
+        buildPage('main'),
+        buildPage('good'),
+        buildPage('wise_saying'),
+        buildPage('wing'),
       ],
-    );
-  }
-
-  Widget buildPage(String type) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: SingleChildScrollView(
-        child: Container(),
-        // child: Html(
-        //   shrinkWrap: true,
-        //   data: EnneagramDescriptionController.to.enneagramDescription.value.enneagramTypeDescription![enneagramType]![type],
-        //   style: htmlStyleMap,
-        // ),
-      ),
     );
   }
 
@@ -83,9 +67,19 @@ class EnneagramDetailDescription extends StatelessWidget {
           height: 400,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: BarChartSample1(),
+              child: EnneagramChart(
+                  scoreMap: AppController.to.user.value.enneagramResult!
+                      .returnEnneagramTypeScoreSumMap(),
+                  maxScore: AppController.to.user.value.enneagramResult!
+                      .returnMaxScore()),
             )),
       ],
+    );
+  }
+
+  Widget buildPage(String type) {
+    return EnneagramWebView(
+      url: 'http://ysy.dothome.co.kr/type$enneagramType/$type.html',
     );
   }
 }

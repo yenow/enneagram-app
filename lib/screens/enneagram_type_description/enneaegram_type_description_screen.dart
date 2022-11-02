@@ -51,7 +51,7 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
       children: [
         buildPage('main'),
         buildPage('good'),
-        buildPage('person'),
+        buildPage('wise_saying'),
         buildPage('wing'),
       ],
     );

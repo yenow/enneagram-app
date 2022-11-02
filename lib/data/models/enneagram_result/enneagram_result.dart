@@ -11,9 +11,21 @@ class EnneagramResult {
   List<Score> scores;
   DateTime createdAt;
 
+  Map<int,double> returnEnneagramTypeScoreSumMap() {
+    Map<int,double> returnMap = {};
+
+    for (var score in scores) {
+      returnMap[score.enneagramType] = (returnMap[score.enneagramType] ?? 0) + score.score.toDouble();
+    }
+    return returnMap;
+  }
+
+  double returnMaxScore() {
+    return (scores.length ~/ 9) * 5;
+  }
+
   EnneagramResult(
       {required this.enneagramType, required this.questionType, required this.scores, required this.createdAt});
-
 
   factory EnneagramResult.fromJson(Map<String, dynamic> json) => _$EnneagramResultFromJson(json);
 

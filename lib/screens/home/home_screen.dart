@@ -41,6 +41,7 @@ class HomeScreen extends StatelessWidget {
           } else if (snapshot.hasError) {
             return const Text('error');
           }
+
           return const Center(
               child: CircularProgressIndicator(
             color: Colors.grey,

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/data/models/question/question.dart';
 import 'package:enneagram/get/controller/enneagram_description_controller.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
@@ -44,6 +46,17 @@ class AppController extends GetxController {
   Future<bool> initData() async {
     await initUser();
     await EnneagramDescriptionController.to.initEnneagramDescription();
+
+    // var singleFile = await DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type1/main.html');
+    // logger.d(singleFile);
+    //
+    // for (int enneagramType = 1;enneagramType<10;enneagramType++) {
+    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/main.html');
+    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/good.html');
+    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/wise_saying.html');
+    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/wing.html');
+    // }
+
     return true;
   }
 
@@ -80,11 +93,10 @@ class AppController extends GetxController {
       userToken: userToken,
       createdAt: DateTime.now(),
       enneagramResult: EnneagramResult(
-        enneagramType: 0,
-        scores: [],
-        questionType: QuestionType.simple,
-        createdAt: DateTime.now()
-      ),
+          enneagramType: 0,
+          scores: [],
+          questionType: QuestionType.simple,
+          createdAt: DateTime.now()),
       enneagramResults: [],
     );
 
