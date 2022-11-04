@@ -25,8 +25,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     logger.d('build HomeScreen');
 
-    // return buildBody();
-
     return FutureBuilder<bool>(
         future: AppController.to.initData(),
         // future: calculation,
@@ -73,8 +71,7 @@ class HomeScreen extends StatelessWidget {
                     flex: 11,
                     child: EnneagramContainer(
                       shape: Shape.vertical,
-                      enneagramType: AppController
-                          .to.user.value.enneagramResult!.enneagramType,
+                      enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
                     ),
                   ),
                   const SizedBox(
@@ -97,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed(MyRoute.testSelectScreen);
                       },
-                      child: Text('에니어그램 테스트하기'),
+                      child: const Text('에니어그램 테스트하기'),
                     ),
                   ),
                   const SizedBox(

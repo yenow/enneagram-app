@@ -6,6 +6,7 @@ import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/models/enneagram_result/enneagram_result_function.dart';
 import '../../data/models/enneagram_result/score.dart';
 import '../../data/models/user/user.dart';
 import '../../utilities/dialog.dart';
@@ -172,37 +173,24 @@ class TestController extends GetxController {
       }
     }
 
+    // create scores
     List<Score> scores = questions.map((element) {
       return Score(
           enneagramType: element.enneagramType!, score: element.score!);
     }).toList();
 
     // calculate enneagramType
-    Map<int, int> enneagramScore = {};
-    for (Score score in scores) {
-      enneagramScore[score.enneagramType] =
-          (enneagramScore[score.enneagramType] ?? 0) + score.score;
-    }
+    Map<int, double> enneagramScore = getEnneagramScoreSumMap(scores);
+    int enneagramType = getHighestEnneagramType(enneagramScore);
 
-    int maxScore = 0;
-    int enneagramType = 0;
-    enneagramScore.forEach((key, value) {
-      if (enneagramScore[key]! > maxScore) {
-        enneagramType = key;
-      } else if (enneagramScore[key]! == maxScore) {
-        // if (enneagramScore[(key-1)%9]! + enneagramScore[(key+1)%9]! < enneagramScore[(enneagramType-1)%9]! + enneagramScore[(enneagramType+1)%9]!) {
-        //
-        // }
-        enneagramType = key;
-      }
-    });
-
+    // create enneagramResult
     EnneagramResult enneagramResult = EnneagramResult(
         enneagramType: enneagramType,
         questionType: questions.elementAt(0).questionType,
         scores: scores,
         createdAt: DateTime.now());
 
+    // create user
     User user = AppController.to.user.value;
     user.enneagramResults.add(enneagramResult);
     User newUser = User(

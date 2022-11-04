@@ -175,7 +175,6 @@ class EnneagramContainer extends StatelessWidget {
                 if (AppController.to.user.value.enneagramResults.isEmpty) {
                   return Container();
                 }
-
                 return buildDateDropDown();
               },
             )),

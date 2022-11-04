@@ -92,7 +92,7 @@ class EnneagramChartState extends State<EnneagramChart> {
       x: x,
       barRods: [
         BarChartRodData(
-          toY: isTouched ? y + 1 : y,
+          toY: isTouched ? y : y ,
           color: isTouched ? Colors.yellow : barColor,
           width: width,
           borderSide: isTouched
@@ -109,7 +109,7 @@ class EnneagramChartState extends State<EnneagramChart> {
     );
   }
 
-  List<BarChartGroupData> showingGroups() => List.generate(8, (i) {
+  List<BarChartGroupData> showingGroups() => List.generate(9, (i) {
     switch (i) {
       case 0:
         return makeGroupData(0, widget.scoreMap[1]!, isTouched: i == touchedIndex);
@@ -181,7 +181,7 @@ class EnneagramChartState extends State<EnneagramChart> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: (rod.toY - 1).toString(),
+                  text: (rod.toY).toString(),
                   style: const TextStyle(
                     color: Colors.yellow,
                     fontSize: 16,

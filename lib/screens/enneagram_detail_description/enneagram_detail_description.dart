@@ -2,6 +2,8 @@
 import 'package:enneagram/data/models/enneagram/enneagram.dart';
 import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../enneagram_type_description/components/enneagram_webview.dart';
 import 'components/enneagram_chart.dart';
@@ -61,18 +63,30 @@ class EnneagramDetailDescription extends StatelessWidget {
   }
 
   Widget buildAnalysisPage() {
-    return ListView(
+    return Column(
       children: [
-        SizedBox(
-          height: 400,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: EnneagramChart(
-                  scoreMap: AppController.to.user.value.enneagramResult!
-                      .returnEnneagramTypeScoreSumMap(),
-                  maxScore: AppController.to.user.value.enneagramResult!
-                      .returnMaxScore()),
-            )),
+        Flexible(
+          flex: 2,
+          fit: FlexFit.tight,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: EnneagramChart(
+                scoreMap: AppController.to.user.value.enneagramResult!
+                    .findEnneagramScoreSumMap(),
+                maxScore: AppController.to.user.value.enneagramResult!
+                    .returnMaxScore()),
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Column(
+            children: [
+              Text('가장 점수가 높은 유형 : ${AppController.to.user.value.enneagramResult!.findHighestEnneagramType()}유형', style: Get.textTheme.headline6,),
+              Text('가장 점수가 낮은 유형 : ${AppController.to.user.value.enneagramResult!.returnLowEnneagramType()}유형', style: Get.textTheme.headline6,),
+              Text('날개 유형 : ${AppController.to.user.value.enneagramResult!.returnWingType()}유형', style: Get.textTheme.headline6,),
+            ],
+          )
+        )
       ],
     );
   }
