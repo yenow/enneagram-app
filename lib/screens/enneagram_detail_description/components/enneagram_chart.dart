@@ -8,9 +8,10 @@ import 'package:get/get.dart';
 Color mainColor = Colors.deepPurple;
 
 class EnneagramChart extends StatefulWidget {
+  final String title;
   final Map<int,double> scoreMap;
   final double maxScore;
-  const EnneagramChart({super.key, required this.scoreMap, required this.maxScore});
+  const EnneagramChart({super.key, required this.scoreMap, required this.maxScore, required this.title});
 
   List<Color> get availableColors => const <Color>[
     Colors.purpleAccent,
@@ -48,7 +49,7 @@ class EnneagramChartState extends State<EnneagramChart> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Text(
-                    '유형별 점수',
+                    widget.title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,// mainColor,//const Color(0xff0f4a3c),

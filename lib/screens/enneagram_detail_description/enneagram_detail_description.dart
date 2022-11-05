@@ -65,12 +65,15 @@ class EnneagramDetailDescription extends StatelessWidget {
   Widget buildAnalysisPage() {
     return Column(
       children: [
+        // SizedBox(height: 10,),
+        // Text('내 유형별 점수는..?',style: Get.textTheme.headline5),
         Flexible(
-          flex: 2,
+          flex: 3,
           fit: FlexFit.tight,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: EnneagramChart(
+                title: '내 유형별 점수는?',
                 scoreMap: AppController.to.user.value.enneagramResult!
                     .findEnneagramScoreSumMap(),
                 maxScore: AppController.to.user.value.enneagramResult!
@@ -78,15 +81,19 @@ class EnneagramDetailDescription extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 1,
-          child: Column(
-            children: [
-              Text('가장 점수가 높은 유형 : ${AppController.to.user.value.enneagramResult!.findHighestEnneagramType()}유형', style: Get.textTheme.headline6,),
-              Text('가장 점수가 낮은 유형 : ${AppController.to.user.value.enneagramResult!.returnLowEnneagramType()}유형', style: Get.textTheme.headline6,),
-              Text('날개 유형 : ${AppController.to.user.value.enneagramResult!.returnWingType()}유형', style: Get.textTheme.headline6,),
-            ],
-          )
+          flex: 2,
+            child: Container()
         )
+        // Flexible(
+        //   flex: 2,
+        //   child: Column(
+        //     children: [
+        //       Text('가장 점수가 높은 유형 : ${AppController.to.user.value.enneagramResult!.findHighestEnneagramType()}유형', style: Get.textTheme.headline6,),
+        //       Text('가장 점수가 낮은 유형 : ${AppController.to.user.value.enneagramResult!.findLowestEnneagramType()}유형', style: Get.textTheme.headline6,),
+        //       Text('날개 유형 : ${AppController.to.user.value.enneagramResult!.findWingType()}유형', style: Get.textTheme.headline6,),
+        //     ],
+        //   )
+        // )
       ],
     );
   }

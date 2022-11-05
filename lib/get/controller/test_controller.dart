@@ -192,7 +192,7 @@ class TestController extends GetxController {
 
     // create user
     User user = AppController.to.user.value;
-    user.enneagramResults.add(enneagramResult);
+    user.enneagramResults.insert(0,enneagramResult);
     User newUser = User(
         userToken: user.userToken,
         createdAt: user.createdAt,

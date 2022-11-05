@@ -72,6 +72,7 @@ class HomeScreen extends StatelessWidget {
                     child: EnneagramContainer(
                       shape: Shape.vertical,
                       enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
+                      wingType: AppController.to.user.value.enneagramResult!.findWingType(),
                     ),
                   ),
                   const SizedBox(

@@ -69,9 +69,9 @@ class AppController extends GetxController {
     if (userToken == null) {
       userToken = const Uuid().v1();
       createUser(userToken);
+
     } else {
       logger.d('userToken : $userToken');
-
       List<QueryDocumentSnapshot<User>> users = await userRef
           .where('userToken', isEqualTo: userToken)
           .get()

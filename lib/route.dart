@@ -4,6 +4,7 @@ import 'package:enneagram/screens/enneagram_introduction/enneagram_introduction_
 import 'package:enneagram/screens/enneagram_introduction/enneagram_introduction_screen.dart';
 import 'package:enneagram/screens/enneagram_type_description/enneaegram_type_description_screen.dart';
 import 'package:enneagram/screens/home/home_screen.dart';
+import 'package:enneagram/screens/setting/page/terms_of_service_page.dart';
 import 'package:enneagram/screens/setting/setting_screen.dart';
 import 'package:enneagram/screens/splash_screen.dart';
 import 'package:enneagram/screens/test/detail_test_screen.dart';
@@ -22,26 +23,32 @@ class MyRoute {
   static const String splashScreen = '/splashScreen';
   static const String testSelectScreen = '/testSelectScreen';
   static const String enneagramIntroduction = '/enneagramIntroduction';
-  static const String enneagramIntroductionRegister = '/enneagramIntroductionRegister';
+  static const String enneagramIntroductionRegister =
+      '/enneagramIntroductionRegister';
   static const String enneagramTypeDescription = '/enneagramTypeDescription';
-  static const String enneagramDetailDescription = '/enneagramDetailDescription';
+  static const String enneagramDetailDescription =
+      '/enneagramDetailDescription';
   static const String detailTestScreen = '/detailTestScreen';
   static const String settingScreen = '/settingScreen';
+  static const String teamsOfService = '/teamsOfService';
 
   static List<GetPage<dynamic>> getRoutes() {
     return [
       GetPage(name: root, page: () => const HomeScreen()),
       GetPage(name: splashScreen, page: () => const SplashScreen()),
       GetPage(name: testSelectScreen, page: () => TestSelectScreen()),
-      GetPage(name: settingScreen, page: () => const SettingScreen()),
-      GetPage(name: enneagramTypeDescription, page: () {
-        int enneagramType = Get.arguments;
-        return EnneagramTypeDescriptionScreen(enneagramType: enneagramType);
-      }),
-     GetPage(name: enneagramDetailDescription, page: () {
-        int enneagramType = Get.arguments;
-        return EnneagramDetailDescription(enneagramType: enneagramType);
-      }),
+      GetPage(
+          name: enneagramTypeDescription,
+          page: () {
+            int enneagramType = Get.arguments;
+            return EnneagramTypeDescriptionScreen(enneagramType: enneagramType);
+          }),
+      GetPage(
+          name: enneagramDetailDescription,
+          page: () {
+            int enneagramType = Get.arguments;
+            return EnneagramDetailDescription(enneagramType: enneagramType);
+          }),
       GetPage(
           name: enneagramIntroduction,
           page: () => const EnneagramIntroductionScreen(),
@@ -63,7 +70,11 @@ class MyRoute {
           return HardTestScreen(list: TestController.to.questions);
         },
         binding: TestControllerBinding(),
-      )
+      ),
+
+      /// static page
+      GetPage(name: settingScreen, page: () => const SettingScreen()),
+      GetPage(name: teamsOfService, page: () => const TermsOfServicePage()),
     ];
   }
 }

@@ -30,7 +30,7 @@ class EnneagramResult {
   }
 
   /// 가장 점수가 낮은 유형
-  int returnLowEnneagramType() {
+  int findLowestEnneagramType() {
     Map<int,double> map = findEnneagramScoreSumMap();
 
     int enneagramType = 0;
@@ -51,7 +51,7 @@ class EnneagramResult {
   }
 
   /// 날개유형
-  int returnWingType() {
+  int findWingType() {
     Map<int,double> map = findEnneagramScoreSumMap();
     int enneagramType = findHighestEnneagramType();
 

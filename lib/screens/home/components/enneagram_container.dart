@@ -17,9 +17,10 @@ enum Shape { vertical, horizontal }
 class EnneagramContainer extends StatelessWidget {
   final Shape shape;
   final int enneagramType;
+  final int? wingType;
 
   const EnneagramContainer(
-      {Key? key, required this.shape, required this.enneagramType})
+      {Key? key, required this.shape, required this.enneagramType, this.wingType})
       : super(key: key);
 
   @override
@@ -198,7 +199,7 @@ class EnneagramContainer extends StatelessWidget {
         ),
         // 애니어그램 설명
         Flexible(
-            flex: 2,
+            flex: 3,
             fit: FlexFit.tight,
             child: buildEnneagramVerticalDescription()),
       ],
@@ -242,25 +243,21 @@ class EnneagramContainer extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Flexible(
-          fit: FlexFit.loose,
-          child: LayoutBuilder(builder: (context, constraints) {
-            // print('maxHeight : ${constraints.maxHeight}');??
-            // print('maxWidth : ${constraints.maxWidth}');
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SizedBox(
-                width: constraints.maxWidth,
-                height: constraints.maxHeight,
-                child: AutoSizeText(
-                  enneagramMap[enneagramType]!.secondDescription,
-                  style: Get.textTheme.bodyText1,
-                  maxLines: 2,
-                ),
-              ),
-            );
-          }),
+        wingType != null
+            ? Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+              child: Block(
+                  child: Text('날개유형 : $wingType유형',
+                      style: Get.theme.textTheme.bodyText1)),
+            )
+            : Container(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: AutoSizeText(
+            enneagramMap[enneagramType]!.secondDescription,
+            style: Get.textTheme.bodyText1,
+            maxLines: 2,
+          ),
         ),
       ],
     );
