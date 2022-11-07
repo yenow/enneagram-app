@@ -18,17 +18,19 @@ class HardTestScreen extends StatelessWidget {
     return Obx(
       () => WillPopScope(
         onWillPop: TestController.to.onWillPop,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('정밀테스트'),
+        child: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('정밀테스트'),
+            ),
+            body: PageView(
+                controller: TestController.to.pageController,
+                children: TestController.to.questions.map((Question element) {
+                  var index = TestController.to.questions.indexOf(element);
+                  // TestController.to.index(index);
+                  return TestPage(question: element, questionIndex: index);
+                }).toList()),
           ),
-          body: PageView(
-              controller: TestController.to.pageController,
-              children: TestController.to.questions.map((Question element) {
-                var index = TestController.to.questions.indexOf(element);
-                // TestController.to.index(index);
-                return TestPage(question: element, questionIndex: index);
-              }).toList()),
         ),
       ),
     );

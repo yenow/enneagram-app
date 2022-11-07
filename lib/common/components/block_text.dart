@@ -8,7 +8,7 @@ class Block extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
         // border: Border.all(width: 1),

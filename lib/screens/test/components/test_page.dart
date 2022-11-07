@@ -43,8 +43,7 @@ class _TestPageState extends State<TestPage> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                     child: LinearProgressIndicator(
                       value: TestController.to.getProgressPercent(),
-                      valueColor:
-                          AlwaysStoppedAnimation(Get.theme.colorScheme.primary),
+                      valueColor: AlwaysStoppedAnimation(Get.theme.colorScheme.primary),
                     ),
                   ),
                 ),
@@ -56,8 +55,7 @@ class _TestPageState extends State<TestPage> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 1),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10))),
+                        borderRadius: const BorderRadius.all(Radius.circular(10))),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -86,10 +84,13 @@ class _TestPageState extends State<TestPage> {
         flex: 5,
         child: Container(
           // alignment: Alignment.center,
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           child: Text(
             '${widget.questionIndex + 1}. ${widget.question.question}',
-            style: Get.textTheme.headline6,
+            style: TextStyle(
+              fontSize: Get.textTheme.headline6!.fontSize,
+              height: 1.4
+            ),
           ),
         ));
   }
@@ -98,8 +99,7 @@ class _TestPageState extends State<TestPage> {
     return Flexible(
         fit: FlexFit.tight,
         flex: 1,
-        child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
+        child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -164,15 +164,13 @@ class _TestPageState extends State<TestPage> {
               });
               TestController.to.clickScore(buttonNumber);
             },
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith((states) {
-              Question elementAt =
-                  TestController.to.questions.elementAt(widget.questionIndex);
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith((states) {
+              // Question elementAt = TestController.to.questions.elementAt(widget.questionIndex);
               if (widget.question.score == buttonNumber) {
                 logger.d('widget.question.score = ${widget.question.score}');
                 return Get.theme.colorScheme.secondary;
               }
-              return Get.theme.colorScheme.primary;
+              return Get.theme.elevatedButtonTheme.style!.backgroundColor!.resolve(states);
             })),
             child: Text(getButtonString(buttonNumber)),
           ),

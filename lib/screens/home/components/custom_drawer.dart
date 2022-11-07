@@ -20,7 +20,7 @@ class CustomDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              decoration: BoxDecoration(color: Get.theme.colorScheme.background),
+              decoration: BoxDecoration(color: Get.theme.primaryColor),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

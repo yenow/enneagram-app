@@ -25,7 +25,7 @@ Map<String, dynamic> _$EnneagramResultToJson(EnneagramResult instance) =>
     };
 
 const _$QuestionTypeEnumMap = {
-  QuestionType.simple: 'simple',
+  QuestionType.detail45: 'simple',
   QuestionType.detail81: 'detail81',
   QuestionType.detail135: 'detail135',
 };

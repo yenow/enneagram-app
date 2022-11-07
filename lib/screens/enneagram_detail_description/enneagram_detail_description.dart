@@ -81,7 +81,7 @@ class EnneagramDetailDescription extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 2,
+          flex: 1,
             child: Container()
         )
         // Flexible(

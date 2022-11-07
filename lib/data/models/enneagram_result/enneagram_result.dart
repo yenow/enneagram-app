@@ -51,7 +51,11 @@ class EnneagramResult {
   }
 
   /// 날개유형
-  int findWingType() {
+  int? findWingType() {
+    if (scores.isEmpty) {
+      return null;
+    }
+
     Map<int,double> map = findEnneagramScoreSumMap();
     int enneagramType = findHighestEnneagramType();
 

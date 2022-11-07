@@ -14,7 +14,7 @@ class InitBinding implements Bindings {
   void dependencies() {
     Get.put(AppController(), permanent: true);
     Get.put(HomeController(), permanent: true);
-    Get.put(EnneagramDescriptionController(), permanent: true);
-    // Get.put(TestController());
+    // Get.put(EnneagramDescriptionController(), permanent: true);
+    Get.put(TestController());
   }
 }

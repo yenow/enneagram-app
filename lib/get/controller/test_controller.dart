@@ -29,10 +29,6 @@ class TestController extends GetxController {
     logger.d("TestController init()");
   }
 
-  void initSimpleTest() {
-    questions.addAll(simpleTestQuestions);
-  }
-
   void initDetailTest135() {
     logger.d("initDetailTest135()");
     detailTest_135Questions.shuffle();
@@ -43,6 +39,12 @@ class TestController extends GetxController {
     logger.d("initDetailTest81()");
     detailTest_81Questions.shuffle();
     questions.addAll(detailTest_81Questions);
+  }
+
+  void initDetailTest45() {
+    logger.d("initDetailTest45()");
+    detailTest_45Questions.shuffle();
+    questions.addAll(detailTest_45Questions);
   }
 
   Future<bool> onWillPop() async {

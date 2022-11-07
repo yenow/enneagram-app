@@ -1,6 +1,5 @@
 import 'package:enneagram/get/controller/test_controller.dart';
 import 'package:enneagram/screens/enneagram_detail_description/enneagram_detail_description.dart';
-import 'package:enneagram/screens/enneagram_introduction/enneagram_introduction_register_screen.dart';
 import 'package:enneagram/screens/enneagram_introduction/enneagram_introduction_screen.dart';
 import 'package:enneagram/screens/enneagram_type_description/enneaegram_type_description_screen.dart';
 import 'package:enneagram/screens/home/home_screen.dart';
@@ -9,25 +8,18 @@ import 'package:enneagram/screens/setting/setting_screen.dart';
 import 'package:enneagram/screens/splash_screen.dart';
 import 'package:enneagram/screens/test/detail_test_screen.dart';
 import 'package:enneagram/screens/test_select/test_select_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-
-import 'constants.dart';
 import 'get/binding/enneagram_introduction_controller_binding.dart';
 import 'get/binding/test_controller_binding.dart';
-import 'get/controller/enneagram_description_controller.dart';
 
 class MyRoute {
   static const String root = '/';
   static const String splashScreen = '/splashScreen';
   static const String testSelectScreen = '/testSelectScreen';
   static const String enneagramIntroduction = '/enneagramIntroduction';
-  static const String enneagramIntroductionRegister =
-      '/enneagramIntroductionRegister';
+  static const String enneagramIntroductionRegister = '/enneagramIntroductionRegister';
   static const String enneagramTypeDescription = '/enneagramTypeDescription';
-  static const String enneagramDetailDescription =
-      '/enneagramDetailDescription';
+  static const String enneagramDetailDescription = '/enneagramDetailDescription';
   static const String detailTestScreen = '/detailTestScreen';
   static const String settingScreen = '/settingScreen';
   static const String teamsOfService = '/teamsOfService';
@@ -54,19 +46,16 @@ class MyRoute {
           page: () => const EnneagramIntroductionScreen(),
           binding: EnneagramIntroductionControllerBinding()),
       GetPage(
-          name: enneagramIntroductionRegister,
-          page: () => const EnneagramIntroductionRegisterScreen(),
-          binding: EnneagramIntroductionControllerBinding()),
-      GetPage(
         name: detailTestScreen,
         page: () {
           var data = Get.arguments;
           if (data == "81") {
             TestController.to.initDetailTest81();
-          } else {
+          } else if (data == "45") {
+            TestController.to.initDetailTest45();
+          } else if (data == "135") {
             TestController.to.initDetailTest135();
           }
-
           return HardTestScreen(list: TestController.to.questions);
         },
         binding: TestControllerBinding(),

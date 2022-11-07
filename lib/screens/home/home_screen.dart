@@ -1,17 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:enneagram/route.dart';
 import 'package:enneagram/screens/home/components/custom_drawer.dart';
 import 'package:enneagram/screens/home/components/enneagram_container.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../constants.dart';
-import '../../data/models/question/question.dart';
-import '../../data/models/enneagram_result/score.dart';
 
 final Future<String> calculation = Future<String>.delayed(
   Duration(seconds: 2),
@@ -56,56 +49,58 @@ class HomeScreen extends StatelessWidget {
               '에니어그램',
             ),
           ),
-          drawer: CustomDrawer(
-              enneagramType:
-                  AppController.to.user.value.enneagramResult!.enneagramType),
-          body: Container(
-            color: Colors.black12,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 11,
-                    child: EnneagramContainer(
-                      shape: Shape.vertical,
-                      enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
-                      wingType: AppController.to.user.value.enneagramResult!.findWingType(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Get.toNamed(MyRoute.enneagramIntroduction);
-                        },
-                        child: const Text('에니어그램이란?')),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.toNamed(MyRoute.testSelectScreen);
-                      },
-                      child: const Text('에니어그램 테스트하기'),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Flexible(flex: 2, child: Container()),
-                ],
+          drawer: CustomDrawer(enneagramType: AppController.to.user.value.enneagramResult!.enneagramType),
+          body: buildScaffoldBody(),
+        ),
+      ),
+    );
+  }
+
+  Container buildScaffoldBody() {
+    return Container(
+      color: Colors.black12,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Flexible(
+              fit: FlexFit.loose,
+              flex: 11,
+              child: EnneagramContainer(
+                shape: Shape.vertical,
+                enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
+                wingType: AppController.to.user.value.enneagramResult!.findWingType(),
               ),
             ),
-          ),
+            const SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              flex: 1,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Get.toNamed(MyRoute.enneagramIntroduction);
+                  },
+                  child: const Text('에니어그램이란?')),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              flex: 1,
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(MyRoute.testSelectScreen);
+                },
+                child: const Text('에니어그램 테스트하기'),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Flexible(flex: 2, child: Container()),
+          ],
         ),
       ),
     );

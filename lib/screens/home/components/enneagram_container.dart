@@ -19,8 +19,7 @@ class EnneagramContainer extends StatelessWidget {
   final int enneagramType;
   final int? wingType;
 
-  const EnneagramContainer(
-      {Key? key, required this.shape, required this.enneagramType, this.wingType})
+  const EnneagramContainer({Key? key, required this.shape, required this.enneagramType, this.wingType})
       : super(key: key);
 
   @override
@@ -41,30 +40,34 @@ class EnneagramContainer extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
+          border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Column(
             children: [
               Center(
                   child: Text(
                 '나의 에니어그램은?',
-                style: Get.theme.textTheme.headline5,
+                style: Get.theme.textTheme.headline4,
               )),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset(
-                  'assets/images/enneagram/pawprint.png',
+              SizedBox(
+                height: 220,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'assets/images/enneagram/pawprint.png',
+                    // color: Colors.deepPurple,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Center(
                   child: Text(
                 '테스트를 진행해주세요!',
-                style: Get.theme.textTheme.subtitle1,
+                style: Get.theme.textTheme.headline4,
               ))
             ],
           ),
@@ -75,58 +78,49 @@ class EnneagramContainer extends StatelessWidget {
 
   /// 에니어그램 타입이 없을때
   Widget buildNoTypeHorizontalContainer() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Flexible(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Image.asset(
-                'assets/images/enneagram/pawprint.png',
-              ),
-            ),
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Flexible(
+          flex: 2,
+          child: Image.asset(
+            'assets/images/enneagram/pawprint.png',
+            // color: Colors.deepPurple,
           ),
-          Flexible(
-            flex: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Center(child: Text('나의 에니어그램은?', style: Get.theme.textTheme.subtitle1,)),
-                // const SizedBox(height: 20,),
-                Center(
-                    child: Text(
-                  '테스트를 진행해주세요!',
-                  style: Get.theme.textTheme.bodyText1,
-                ))
-              ],
-            ),
+        ),
+        Flexible(
+          flex: 5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AutoSizeText(
+                    '테스트를 진행해주세요!',
+                    style: Get.theme.textTheme.subtitle2,
+                    maxLines: 1,
+                  ),
+                ],
+              )
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Container buildVerticalContainer() {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
+          border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Flexible(
-              flex: 11,
-              fit: FlexFit.loose,
-              child: buildEnneagramVerticalContainer()),
+          Flexible(flex: 11, fit: FlexFit.loose, child: buildEnneagramVerticalContainer()),
           const SizedBox(
             height: 10,
           ),
@@ -136,8 +130,7 @@ class EnneagramContainer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(MyRoute.enneagramDetailDescription,
-                        arguments: enneagramType);
+                    Get.toNamed(MyRoute.enneagramDetailDescription, arguments: enneagramType);
                   },
                   child: const Text('자세히 알아보기')),
             ),
@@ -162,10 +155,7 @@ class EnneagramContainer extends StatelessWidget {
                 return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: AutoSizeText('나의 에니어그램유형은?',
-                        maxLines: 1,
-                        maxFontSize: 50,
-                        minFontSize: 5,
-                        style: Get.textTheme.headline4));
+                        maxLines: 1, maxFontSize: 50, minFontSize: 5, style: Get.textTheme.headline4));
               },
             )),
         Flexible(
@@ -198,10 +188,7 @@ class EnneagramContainer extends StatelessWidget {
           width: 10,
         ),
         // 애니어그램 설명
-        Flexible(
-            flex: 3,
-            fit: FlexFit.tight,
-            child: buildEnneagramVerticalDescription()),
+        Flexible(flex: 3, fit: FlexFit.tight, child: buildEnneagramVerticalDescription()),
       ],
     );
   }
@@ -210,15 +197,11 @@ class EnneagramContainer extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: DateDropDown(
-        list: AppController.to.user.value.enneagramResults
-            .map((e) => dateFormatter.format(e.createdAt))
-            .toList(),
+        list: AppController.to.user.value.enneagramResults.map((e) => dateFormatter.format(e.createdAt)).toList(),
         callback: (String date) {
           logger.d('click date = $date');
-          EnneagramResult enneagramResult = AppController
-              .to.user.value.enneagramResults
-              .where((element) =>
-                  date == dateFormatter.format(element.createdAt))
+          EnneagramResult enneagramResult = AppController.to.user.value.enneagramResults
+              .where((element) => date == dateFormatter.format(element.createdAt))
               .first;
           User newUser = User(
               userToken: AppController.to.user.value.userToken,
@@ -238,18 +221,15 @@ class EnneagramContainer extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Text(enneagramMap[enneagramType]!.getName(),
-            style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
+        Text(enneagramMap[enneagramType]!.getName(), style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
         const SizedBox(
           height: 5,
         ),
         wingType != null
             ? Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-              child: Block(
-                  child: Text('날개유형 : $wingType유형',
-                      style: Get.theme.textTheme.bodyText1)),
-            )
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                child: Block(child: Text('날개유형 : $wingType유형', style: Get.theme.textTheme.bodyText1)),
+              )
             : Container(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -267,10 +247,7 @@ class EnneagramContainer extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Flexible(
-            flex: 5,
-            fit: FlexFit.loose,
-            child: buildEnneagramHorizontalContainer()),
+        Flexible(flex: 5, fit: FlexFit.loose, child: buildEnneagramHorizontalContainer()),
         const SizedBox(
           height: 5,
         ),
@@ -282,9 +259,7 @@ class EnneagramContainer extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed(MyRoute.testSelectScreen);
                 },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Get.theme.colorScheme.primary)),
+                // style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Get.theme.colorScheme.primary)),
                 child: Text('${enneagramMap[enneagramType]!.getName()} 알아보기')),
           ),
         ),
@@ -316,10 +291,7 @@ class EnneagramContainer extends StatelessWidget {
         const SizedBox(
           width: 8,
         ),
-        Flexible(
-            flex: 5,
-            fit: FlexFit.tight,
-            child: buildEnneagramHorizontalDescription()),
+        Flexible(flex: 5, fit: FlexFit.tight, child: buildEnneagramHorizontalDescription()),
       ],
     );
   }
@@ -333,8 +305,7 @@ class EnneagramContainer extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Text(enneagramMap[enneagramType]!.getName(),
-              style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
+          Text(enneagramMap[enneagramType]!.getName(), style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
           const SizedBox(
             height: 5,
           ),

@@ -7,11 +7,12 @@ ThemeData theme() {
     textTheme: textTheme(),
     fontFamily: 'cafe24SsurroundAir_KR',
     colorScheme: const ColorScheme(
-      primary: Color(0xFF7033B9),
+      primary: Colors.deepPurple,
       onPrimary: Colors.white,
-      background: Color(0xFFA990C7),
+      background: Color(0xFFD7B7FF),
       onBackground: Colors.white,
-      secondary: Color(0xFF3A0F65),
+      secondary: Color(0xFF402572),
+      //Color(0xFF3A0F65),
       onSecondary: Colors.white,
       error: Colors.redAccent,
       onError: Colors.white,
@@ -19,37 +20,41 @@ ThemeData theme() {
       onSurface: Colors.black,
       brightness: Brightness.light,
     ),
-    primaryColor: Colors.purple.shade300,
+    primaryColor: Colors.deepPurple.shade100,
     tabBarTheme: tabBarTheme(),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       minimumSize: MaterialStateProperty.all(Size.infinite),
-      elevation: MaterialStateProperty.all(1),
+      backgroundColor: MaterialStateProperty.all(Colors.deepPurple.shade400),
+      elevation: MaterialStateProperty.all(4),
       shape: MaterialStateProperty.all(RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
+        // side: const BorderSide(color: Colors.black87)
       )),
+      // textStyle: MaterialStateProperty.all(const TextStyle(
+      //   fontSize: 15,
+      //   color: Colors.black87
+      // )),
     )),
   );
 }
 
 TabBarTheme tabBarTheme() {
   return TabBarTheme(
-      indicator: BoxDecoration(
-          border: Border(
-              bottom:
-                  BorderSide(color: Colors.deepPurple.shade200, width: 4))));
+    indicator: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white, width: 4))),
+    labelColor: Colors.white,
+    unselectedLabelColor: Colors.grey.shade300
+  );
 }
 
 AppBarTheme appTheme() {
-  return const AppBarTheme(
+  return AppBarTheme(
       centerTitle: true,
       // color: Colors.white,
-      // backgroundColor: Colors.transparent,
-      elevation: 0.0,
-      titleTextStyle: TextStyle(
-          fontSize: 20,
-          fontFamily: 'cafe24SsurroundAir_KR',
-          color: Colors.white));
+      // backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.deepPurple.shade400,
+      elevation: 3.0,
+      titleTextStyle: const TextStyle(fontSize: 20, fontFamily: 'cafe24SsurroundAir_KR', color: Colors.white));
 }
 
 TextTheme textTheme() {

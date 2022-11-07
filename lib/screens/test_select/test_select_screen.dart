@@ -12,6 +12,7 @@ class TestSelectScreen extends StatelessWidget {
     "가능한 '3번(보통이다)'는 피해주는게 좋아요.",
     "너무 깊게 생각하지말고 체크해주세요.",
     "솔직하게 체크해주세요.",
+    "문항이 많을수록 더 정확한 결과가 나옵니다."
     // "세상에 사람을 완벽하게 이해할 수 있는 도구는 없어요. 개인마다 모두 차이가 있어요.",
     // "너무 질문이 많으신가요? 그래도 조금만 참아주세요. 더 정확한 결과를 위해서니까요.",
     // "에니어그램은 내 단점을 통해 찾는게 더 쉬울수 있어요.",
@@ -38,21 +39,22 @@ class TestSelectScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius:
-                            const BorderRadius.all(Radius.circular(10))),
+                            borderRadius: const BorderRadius.all(Radius.circular(10))),
                         child: buildTestPrecautions(),
                       )),
-                  // Flexible(
-                  //   flex: 2,
-                  //   child: Container(
-                  //     padding: EdgeInsets.symmetric(vertical: 5),
-                  //     child: ElevatedButton(
-                  //         onPressed: () {
-                  //           // Get.toNamed(MyRoute.testSelectScreen);
-                  //         },
-                  //         child: const Text('간단테스트')),
-                  //   ),
-                  // ),
+                  Flexible(
+                    flex: 2,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            var result = await Get.toNamed(MyRoute.detailTestScreen, arguments: "45");
+                            logger.d('result = $result');
+                            TestController.to.clearQuestions();
+                          },
+                          child: const Text('테스트 (45문항)')),
+                    ),
+                  ),
                   Flexible(
                     flex: 2,
                     child: Container(
@@ -63,7 +65,7 @@ class TestSelectScreen extends StatelessWidget {
                             logger.d('result = $result');
                             TestController.to.clearQuestions();
                           },
-                          child: const Text('정밀 테스트 (81문항)')),
+                          child: const Text('테스트 (81문항)')),
                     ),
                   ),
                   Flexible(
@@ -75,7 +77,7 @@ class TestSelectScreen extends StatelessWidget {
                             Get.toNamed(MyRoute.detailTestScreen, arguments: "135");
                             TestController.to.clearQuestions();
                           },
-                          child: const Text('정밀 테스트 (135문항)')),
+                          child: const Text('테스트 (135문항)')),
                     ),
                   ),
                   Flexible(flex: 2, child: Container()),
@@ -86,39 +88,40 @@ class TestSelectScreen extends StatelessWidget {
 
   Column buildTestPrecautions() {
     return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          buildTestPrecautionTitle(),
-                          const SizedBox(
-                            height: 20,
-                            width: double.infinity,
-                          ),
-                          ListView(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            children: notificationList.map((notification) {
-                              int index = notificationList.indexOf(notification) + 1;
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        buildTestPrecautionTitle(),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            children: notificationList.map((notification) {
+              int index = notificationList.indexOf(notification) + 1;
 
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 5),
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text('$index. $notification',
-                                        style: Get.textTheme.bodyText1)),
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      );
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('$index. $notification', style: Get.textTheme.bodyText1)),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
   }
 
   Row buildTestPrecautionTitle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(
-          Icons.error_outline,
-          size: 30,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
+          child: Icon(
+            Icons.error_outline,
+            size: Get.textTheme.headline3!.fontSize,
+          ),
         ),
         const SizedBox(
           width: 5,

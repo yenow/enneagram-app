@@ -18,13 +18,13 @@ class AppController extends GetxController {
           enneagramResult: EnneagramResult(
               enneagramType: 0,
               scores: [],
-              questionType: QuestionType.simple,
+              questionType: QuestionType.detail45,
               createdAt: DateTime.now()),
           enneagramResults: [
             EnneagramResult(
                 enneagramType: 0,
                 scores: [],
-                questionType: QuestionType.simple,
+                questionType: QuestionType.detail45,
                 createdAt: DateTime.now())
           ],
           createdAt: DateTime.now())
@@ -45,7 +45,7 @@ class AppController extends GetxController {
 
   Future<bool> initData() async {
     await initUser();
-    await EnneagramDescriptionController.to.initEnneagramDescription();
+    // await EnneagramDescriptionController.to.initEnneagramDescription();
 
     // var singleFile = await DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type1/main.html');
     // logger.d(singleFile);
@@ -95,7 +95,7 @@ class AppController extends GetxController {
       enneagramResult: EnneagramResult(
           enneagramType: 0,
           scores: [],
-          questionType: QuestionType.simple,
+          questionType: QuestionType.detail45,
           createdAt: DateTime.now()),
       enneagramResults: [],
     );
