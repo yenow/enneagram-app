@@ -9,6 +9,11 @@ import '../../get/controller/enneagram_description_controller.dart';
 
 class EnneagramTypeDescriptionScreen extends StatelessWidget {
   final int enneagramType;
+  // final tabController = TabController(
+  // initialIndex: 0,
+  // length: 2,
+  // vsync: this,
+  // );
 
   const EnneagramTypeDescriptionScreen({Key? key, required this.enneagramType})
       : super(key: key);
@@ -17,8 +22,8 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: DefaultTabController(
-      length: 4,
-      child: Scaffold(
+          length: 4,
+          child: Scaffold(
           appBar: AppBar(
             title: Text(enneagramMap[enneagramType]!.getName()),
             bottom: buildTabBar(),
@@ -48,6 +53,7 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
 
   Widget buildBody() {
     return TabBarView(
+      physics: NeverScrollableScrollPhysics(),
       children: [
         buildPage('main'),
         buildPage('good'),
