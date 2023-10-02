@@ -53,7 +53,7 @@ class EnneagramChartState extends State<EnneagramChart> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,// mainColor,//const Color(0xff0f4a3c),
-                      fontSize: Get.textTheme.headline6!.fontSize,
+                      fontSize: Get.textTheme.titleMedium!.fontSize,
                     ),
                   ),
                   const SizedBox(

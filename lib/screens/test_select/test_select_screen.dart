@@ -103,7 +103,7 @@ class TestSelectScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('$index. $notification', style: Get.textTheme.bodyText1)),
+                    child: Text('$index. $notification', style: Get.textTheme.bodyLarge)),
               );
             }).toList(),
           ),
@@ -120,15 +120,15 @@ class TestSelectScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
           child: Icon(
             Icons.error_outline,
-            size: Get.textTheme.headline3!.fontSize,
+            size: Get.textTheme.titleLarge!.fontSize,
           ),
         ),
         const SizedBox(
           width: 5,
         ),
         Text(
-          '테스트시 주의사항',
-          style: Get.textTheme.headline5,
+          '주의사항',
+          style: Get.textTheme.titleLarge,
         ),
       ],
     );

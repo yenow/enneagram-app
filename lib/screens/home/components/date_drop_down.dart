@@ -19,13 +19,9 @@ class _DateDropDownState extends State<DateDropDown> {
 
     return DropdownButton<String>(
       value: dropdownValue,
-      // icon: const Icon(Icons.arrow_downward),
-      // elevation: 16,
-      style: Get.textTheme.bodyText2,
-      // underline: Container(
-      //   height: 2,
-      //   color: Colors.deepPurpleAccent,
-      // ),
+      style: Get.textTheme.bodySmall,
+      underline: Container(),
+      alignment: AlignmentDirectional.topCenter,
       onChanged: (String? value) {
         // This is called when the user selects an item.
         setState(() {

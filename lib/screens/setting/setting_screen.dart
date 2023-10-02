@@ -34,9 +34,9 @@ class SettingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('앱 버전',
-                    style: Get.textTheme.subtitle1,
+                    style: Get.textTheme.titleMedium,
                     textAlign: TextAlign.left),
-                Text('1.0.1', style: Get.textTheme.subtitle1)
+                Text('1.0.1', style: Get.textTheme.titleMedium)
               ],
             ),
           ),
@@ -96,7 +96,7 @@ class SettingScreen extends StatelessWidget {
       child: Align(
           alignment: Alignment.centerLeft,
           child: Text(title,
-              style: Get.textTheme.subtitle1, textAlign: TextAlign.left)),
+              style: Get.textTheme.titleMedium, textAlign: TextAlign.left)),
     );
   }
 

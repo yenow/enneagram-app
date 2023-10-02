@@ -1,5 +1,6 @@
 import 'package:enneagram/get/controller/test_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../constants.dart';
@@ -88,7 +89,7 @@ class _TestPageState extends State<TestPage> {
           child: Text(
             '${widget.questionIndex + 1}. ${widget.question.question}',
             style: TextStyle(
-              fontSize: Get.textTheme.headline6!.fontSize,
+              fontSize: Get.textTheme.titleSmall!.fontSize,
               height: 1.4
             ),
           ),
@@ -126,7 +127,7 @@ class _TestPageState extends State<TestPage> {
                   child: Text(
                     // '${widget.questionIndex + 1}',
                     '${widget.questionIndex + 1} / ${TestController.to.questions.length}',
-                    style: Get.textTheme.headline6,
+                    style: Get.textTheme.titleMedium,
                   )),
               // 다음 페이지로
               IconButton(
@@ -156,7 +157,7 @@ class _TestPageState extends State<TestPage> {
     return Flexible(
         flex: 1,
         child: Padding(
-          padding: const EdgeInsets.all(4),
+          padding: EdgeInsets.symmetric(vertical: 7.h),
           child: ElevatedButton(
             onPressed: () {
               setState(() {

@@ -13,7 +13,7 @@ final DateFormat dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
 Map<String, Style> htmlStyleMap = {
   "p": Style(
       fontFamily: 'cafe24SsurroundAir_KR',
-      fontSize: FontSize(Get.textTheme.bodyText1!.fontSize!),
+      fontSize: FontSize(Get.textTheme.bodyLarge!.fontSize!),
       padding: const EdgeInsets.all(1),
       margin: Margins(
           bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
@@ -21,13 +21,13 @@ Map<String, Style> htmlStyleMap = {
       lineHeight: const LineHeight(1.4)),
   "h2": Style(
     fontFamily: 'cafe24SsurroundAir_KR',
-    fontSize: FontSize(Get.textTheme.headline5!.fontSize!),
+    fontSize: FontSize(Get.textTheme.titleLarge!.fontSize!),
     margin: Margins(
         bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
   ),
   "h3": Style(
     fontFamily: 'cafe24SsurroundAir_KR',
-    fontSize: FontSize(Get.textTheme.headline6!.fontSize!),
+    fontSize: FontSize(Get.textTheme.titleMedium!.fontSize!),
     padding: const EdgeInsets.symmetric(vertical: 10),
     margin: Margins(
         bottom: Margin(0), left: Margin(0), right: Margin(0), top: Margin(0)),
@@ -66,7 +66,7 @@ Map<String, Style> htmlStyleMap = {
           top: Margin(3))),
   "li": Style(
     fontFamily: 'cafe24SsurroundAir_KR',
-    fontSize: FontSize(Get.textTheme.bodyText1!.fontSize!),
+    fontSize: FontSize(Get.textTheme.bodyLarge!.fontSize!),
     padding: const EdgeInsets.symmetric(vertical: 2),
     lineHeight: const LineHeight(1.4),
     wordSpacing: 1.0,

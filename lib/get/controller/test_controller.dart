@@ -53,17 +53,17 @@ class TestController extends GetxController {
     await Get.dialog(AlertDialog(
       title: Text(
         '알림',
-        style: Get.textTheme.subtitle1,
+        style: Get.textTheme.titleMedium,
       ),
       content: Text(
         '테스트를 그만하시겠습니까?',
-        style: Get.textTheme.bodyText1,
+        style: Get.textTheme.bodyLarge,
       ),
       actions: [
         TextButton(
           child: Text(
             "예",
-            style: Get.textTheme.bodyText1,
+            style: Get.textTheme.bodyLarge,
           ),
           onPressed: () {
             Get.back();
@@ -71,7 +71,7 @@ class TestController extends GetxController {
           },
         ),
         TextButton(
-          child: Text("아니요", style: Get.textTheme.bodyText1),
+          child: Text("아니요", style: Get.textTheme.bodyLarge),
           onPressed: () {
             Get.back();
           },

@@ -34,14 +34,14 @@ class CustomDrawer extends StatelessWidget {
               )),
           ListTile(
             leading: const Icon(Icons.home),
-            title: Text('에니어그램이란?', style: Get.textTheme.bodyText2,),
+            title: Text('에니어그램이란?', style: Get.textTheme.bodyMedium,),
             onTap: () {
               Get.toNamed(MyRoute.enneagramIntroduction);
             },
           ),
           ExpansionTile(
             leading: const Icon(Icons.apps_rounded),
-            title: Text('에니어그램 9가지 유형', style: Get.textTheme.bodyText2,),
+            title: Text('에니어그램 9가지 유형', style: Get.textTheme.bodyMedium,),
             children: <Widget>[
               for (var i = 1; i <= 9; i++)
                 GestureDetector(
@@ -68,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
                               ),
                               Text(
                                 enneagramMap[i]!.getName(),
-                                style: Get.textTheme.bodyText2,
+                                style: Get.textTheme.bodyMedium,
                               ),
                             ],
                           ),
@@ -84,7 +84,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: Text('설정', style: Get.textTheme.bodyText2,),
+            title: Text('설정', style: Get.textTheme.bodyMedium,),
             onTap: () {
               Get.toNamed(MyRoute.settingScreen);
             },

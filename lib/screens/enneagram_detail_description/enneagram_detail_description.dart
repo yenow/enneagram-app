@@ -100,7 +100,7 @@ class EnneagramDetailDescription extends StatelessWidget {
 
   Widget buildPage(String type) {
     return EnneagramWebView(
-      url: 'http://ysy.dothome.co.kr/type$enneagramType/$type.html',
+      url: 'http://168.126.221.239:58000/type$enneagramType/$type.html',
     );
   }
 }

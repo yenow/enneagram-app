@@ -45,18 +45,6 @@ class AppController extends GetxController {
 
   Future<bool> initData() async {
     await initUser();
-    // await EnneagramDescriptionController.to.initEnneagramDescription();
-
-    // var singleFile = await DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type1/main.html');
-    // logger.d(singleFile);
-    //
-    // for (int enneagramType = 1;enneagramType<10;enneagramType++) {
-    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/main.html');
-    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/good.html');
-    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/wise_saying.html');
-    //   DefaultCacheManager().getSingleFile('http://ysy.dothome.co.kr/type$enneagramType/wing.html');
-    // }
-
     return true;
   }
 

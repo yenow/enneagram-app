@@ -5,6 +5,7 @@ import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../constants.dart';
@@ -19,19 +20,14 @@ class EnneagramContainer extends StatelessWidget {
   final int enneagramType;
   final int? wingType;
 
-  const EnneagramContainer({Key? key, required this.shape, required this.enneagramType, this.wingType})
-      : super(key: key);
+  const EnneagramContainer({Key? key, required this.shape, required this.enneagramType, this.wingType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (shape == Shape.vertical) {
-      return AppController.to.user.value.enneagramResult!.enneagramType == 0
-          ? buildNoTypeVerticalContainer()
-          : buildVerticalContainer();
+      return AppController.to.user.value.enneagramResult!.enneagramType == 0 ? buildNoTypeVerticalContainer() : buildVerticalContainer();
     } else {
-      return AppController.to.user.value.enneagramResult!.enneagramType == 0
-          ? buildNoTypeHorizontalContainer()
-          : buildHorizontalContainer();
+      return AppController.to.user.value.enneagramResult!.enneagramType == 0 ? buildNoTypeHorizontalContainer() : buildHorizontalContainer();
     }
   }
 
@@ -39,8 +35,7 @@ class EnneagramContainer extends StatelessWidget {
   Widget buildNoTypeVerticalContainer() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
+      decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -49,12 +44,13 @@ class EnneagramContainer extends StatelessWidget {
           Column(
             children: [
               Center(
-                  child: Text(
-                '나의 에니어그램은?',
-                style: Get.theme.textTheme.headline4,
-              )),
+                child: Text(
+                  '나의 에니어그램은?',
+                  style: Get.theme.textTheme.headlineSmall,
+                ),
+              ),
               SizedBox(
-                height: 220,
+                height: 220.h,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Image.asset(
@@ -67,7 +63,7 @@ class EnneagramContainer extends StatelessWidget {
               Center(
                   child: Text(
                 '테스트를 진행해주세요!',
-                style: Get.theme.textTheme.headline4,
+                style: Get.theme.textTheme.headlineSmall,
               ))
             ],
           ),
@@ -100,7 +96,7 @@ class EnneagramContainer extends StatelessWidget {
                 children: [
                   AutoSizeText(
                     '테스트를 진행해주세요!',
-                    style: Get.theme.textTheme.subtitle2,
+                    style: Get.theme.textTheme.titleSmall,
                     maxLines: 1,
                   ),
                 ],
@@ -114,8 +110,7 @@ class EnneagramContainer extends StatelessWidget {
 
   Container buildVerticalContainer() {
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
+      decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -154,8 +149,7 @@ class EnneagramContainer extends StatelessWidget {
               builder: (BuildContext context, BoxConstraints constraints) {
                 return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: AutoSizeText('나의 에니어그램유형은?',
-                        maxLines: 1, maxFontSize: 50, minFontSize: 5, style: Get.textTheme.headline4));
+                    child: AutoSizeText('나의 에니어그램유형은?', maxLines: 1, maxFontSize: 50, minFontSize: 5, style: Get.textTheme.headlineSmall));
               },
             )),
         Flexible(
@@ -200,9 +194,8 @@ class EnneagramContainer extends StatelessWidget {
         list: AppController.to.user.value.enneagramResults.map((e) => dateFormatter.format(e.createdAt)).toList(),
         callback: (String date) {
           logger.d('click date = $date');
-          EnneagramResult enneagramResult = AppController.to.user.value.enneagramResults
-              .where((element) => date == dateFormatter.format(element.createdAt))
-              .first;
+          EnneagramResult enneagramResult =
+              AppController.to.user.value.enneagramResults.where((element) => date == dateFormatter.format(element.createdAt)).first;
           User newUser = User(
               userToken: AppController.to.user.value.userToken,
               createdAt: AppController.to.user.value.createdAt,
@@ -221,21 +214,21 @@ class EnneagramContainer extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Text(enneagramMap[enneagramType]!.getName(), style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
+        Text(enneagramMap[enneagramType]!.getName(), style: Get.theme.textTheme.titleMedium, textAlign: TextAlign.left),
         const SizedBox(
           height: 5,
         ),
         wingType != null
             ? Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                child: Block(child: Text('날개유형 : $wingType유형', style: Get.theme.textTheme.bodyText1)),
+                child: Block(child: Text('날개유형 : $wingType유형', style: Get.theme.textTheme.bodyLarge)),
               )
             : Container(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: AutoSizeText(
             enneagramMap[enneagramType]!.secondDescription,
-            style: Get.textTheme.bodyText1,
+            style: Get.textTheme.bodyLarge,
             maxLines: 2,
           ),
         ),
@@ -305,7 +298,7 @@ class EnneagramContainer extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Text(enneagramMap[enneagramType]!.getName(), style: Get.theme.textTheme.headline6, textAlign: TextAlign.left),
+          Text(enneagramMap[enneagramType]!.getName(), style: Get.theme.textTheme.titleMedium, textAlign: TextAlign.left),
           const SizedBox(
             height: 5,
           ),

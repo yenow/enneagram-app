@@ -21,7 +21,7 @@ class HardTestScreen extends StatelessWidget {
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('정밀테스트'),
+              title: const Text('정밀 테스트'),
             ),
             body: PageView(
                 controller: TestController.to.pageController,
