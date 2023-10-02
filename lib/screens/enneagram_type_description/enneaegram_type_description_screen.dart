@@ -9,21 +9,21 @@ import '../../get/controller/enneagram_description_controller.dart';
 
 class EnneagramTypeDescriptionScreen extends StatelessWidget {
   final int enneagramType;
+
   // final tabController = TabController(
   // initialIndex: 0,
   // length: 2,
   // vsync: this,
   // );
 
-  const EnneagramTypeDescriptionScreen({Key? key, required this.enneagramType})
-      : super(key: key);
+  const EnneagramTypeDescriptionScreen({Key? key, required this.enneagramType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: DefaultTabController(
-          length: 4,
-          child: Scaffold(
+      length: 4,
+      child: Scaffold(
           appBar: AppBar(
             title: Text(enneagramMap[enneagramType]!.getName()),
             bottom: buildTabBar(),
@@ -36,16 +36,28 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
     return const TabBar(
       tabs: <Widget>[
         Tab(
-          icon: Icon(Icons.home),
+          icon: Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
         ),
         Tab(
-          icon: Icon(Icons.article),
+          icon: Icon(
+            Icons.article,
+            color: Colors.white,
+          ),
         ),
         Tab(
-          icon: Icon(Icons.people),
+          icon: Icon(
+            Icons.people,
+            color: Colors.white,
+          ),
         ),
         Tab(
-          icon: Icon(Icons.air),
+          icon: Icon(
+            Icons.air,
+            color: Colors.white,
+          ),
         ),
       ],
     );

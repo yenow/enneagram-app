@@ -8,6 +8,7 @@ import '../../../constants.dart';
 
 class CustomDrawer extends StatelessWidget {
   final int enneagramType;
+
   const CustomDrawer({Key? key, required this.enneagramType}) : super(key: key);
 
   @override
@@ -34,57 +35,62 @@ class CustomDrawer extends StatelessWidget {
               )),
           ListTile(
             leading: const Icon(Icons.home),
-            title: Text('에니어그램이란?', style: Get.textTheme.bodyMedium,),
+            title: Text(
+              '에니어그램이란?',
+              style: Get.textTheme.bodyMedium,
+            ),
             onTap: () {
               Get.toNamed(MyRoute.enneagramIntroduction);
             },
           ),
           ExpansionTile(
             leading: const Icon(Icons.apps_rounded),
-            title: Text('에니어그램 9가지 유형', style: Get.textTheme.bodyMedium,),
+            title: Text(
+              '에니어그램 9가지 유형',
+              style: Get.textTheme.bodyMedium,
+            ),
             children: <Widget>[
               for (var i = 1; i <= 9; i++)
-                GestureDetector(
+                InkWell(
+                  onTap: () {
+                    logger.i('tile click');
+                    Get.toNamed(MyRoute.enneagramTypeDescription, arguments: i);
+                  },
                   child: ListTile(
-                    title: InkWell(
-                      onTap: () {
-                        Get.toNamed(MyRoute.enneagramTypeDescription, arguments: i);
-                      },
-                      child: Row(
-                        children: [
-                          Row(
-                            // textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 5),
-                                child: Image.asset(
-                                  enneagramMap[i]!.imageUrl!,
-                                  height: 20,
-                                  width: 20,
-                                ),
+                    title: Row(
+                      children: [
+                        Row(
+                          // textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 5),
+                              child: Image.asset(
+                                enneagramMap[i]!.imageUrl!,
+                                height: 20,
+                                width: 20,
                               ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                enneagramMap[i]!.getName(),
-                                style: Get.textTheme.bodyMedium,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              enneagramMap[i]!.getName(),
+                              style: Get.textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    onTap: () {
-                      Get.back();
-                    },
                   ),
                 ),
             ],
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: Text('설정', style: Get.textTheme.bodyMedium,),
+            title: Text(
+              '설정',
+              style: Get.textTheme.bodyMedium,
+            ),
             onTap: () {
               Get.toNamed(MyRoute.settingScreen);
             },
