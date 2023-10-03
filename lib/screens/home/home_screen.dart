@@ -1,7 +1,6 @@
 import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:enneagram/route.dart';
 import 'package:enneagram/screens/home/components/custom_drawer.dart';
-import 'package:enneagram/screens/home/components/enneagram_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -35,9 +34,10 @@ class HomeScreen extends StatelessWidget {
           }
 
           return const Center(
-              child: CircularProgressIndicator(
-            color: Colors.grey,
-          ));
+            child: CircularProgressIndicator(
+              color: Colors.grey,
+            ),
+          );
         });
   }
 
@@ -138,7 +138,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              enneagramMap[index]!.imageUrl!,
+              enneagramMap[index]!.imageUrl,
               fit: BoxFit.fitHeight,
               height: 60.h,
             ),

@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enneagram/common/object/device_info.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/data/models/question/question.dart';
-import 'package:enneagram/get/controller/enneagram_description_controller.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../common/function/device_info_function.dart';
 import '../../constants.dart';
 import '../../data/models/user/user.dart';
 
@@ -36,6 +36,8 @@ class AppController extends GetxController {
           fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
           toFirestore: (enneagramResult, _) => enneagramResult.toJson());
 
+  late DeviceInfo deviceInfo;
+  late PackageInfo packageInfo;
   late SharedPreferences prefs;
 
   Future<void> initSharedPreferences() async {
@@ -45,6 +47,10 @@ class AppController extends GetxController {
 
   Future<bool> initData() async {
     await initUser();
+
+    deviceInfo = await getDeviceInfo();
+    packageInfo = await PackageInfo.fromPlatform();
+
     return true;
   }
 

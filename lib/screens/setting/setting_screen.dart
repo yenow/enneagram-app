@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -16,87 +17,64 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-              title: const Text('설정'),
-            ),
-            body: buildBody()));
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('설정'),
+        ),
+        body: buildBody(),
+      ),
+    );
   }
 
   Widget buildBody() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('앱 버전',
-                    style: Get.textTheme.titleMedium,
-                    textAlign: TextAlign.left),
-                Text('1.0.1', style: Get.textTheme.titleMedium)
+                Text('앱 버전', style: Get.textTheme.bodyLarge, textAlign: TextAlign.left),
+                Text('${AppController.to.packageInfo.version}', style: Get.textTheme.bodyLarge),
               ],
             ),
           ),
-          const Divider(
-            thickness: 1,
-            color: Colors.grey,
-          ),
-          GestureDetector(
+          divider(),
+          InkWell(
             onTap: () {
               Get.toNamed(MyRoute.teamsOfService);
             },
             child: buildListItem('공지사항'),
           ),
-          const Divider(
-            thickness: 1,
-            color: Colors.grey,
+          divider(),
+          InkWell(
+            onTap: () {
+              Get.toNamed(MyRoute.teamsOfService);
+            },
+            child: buildListItem('이용약관 및 정책'),
           ),
-          GestureDetector(
-              onTap: () {
-                Get.toNamed(MyRoute.teamsOfService);
-              },
-              child: buildListItem('이용약관 및 정책')),
-          const Divider(
-            thickness: 1,
-            color: Colors.grey,
-          ),
-          Flexible(
-            flex: 8,
-            child: Container(),
-          ),
-          Flexible(
-            flex: 1,
-            child: ElevatedButton(
-              onPressed: () {
-                AppController.to.removeUserToken();
-              },
-              child: const Text('토큰 지우기'),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Flexible(
-            flex: 1,
-            child: ElevatedButton(
-                onPressed: firebaseTestMethod,
-                child: const Text('파이어베이스 테스트 버튼')),
-          ),
+          divider(),
         ],
       ),
     );
   }
 
+  Divider divider() {
+    return const Divider(
+      thickness: 0.5,
+      color: Colors.grey,
+    );
+  }
+
   Padding buildListItem(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
       child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(title,
-              style: Get.textTheme.titleMedium, textAlign: TextAlign.left)),
+        alignment: Alignment.centerLeft,
+        child: Text(title, style: Get.textTheme.bodyLarge, textAlign: TextAlign.left),
+      ),
     );
   }
 
@@ -115,8 +93,7 @@ class SettingScreen extends StatelessWidget {
     //   print(value.data());
     // });
 
-    CollectionReference firstDemos =
-        FirebaseFirestore.instance.collection('FirstDemo');
+    CollectionReference firstDemos = FirebaseFirestore.instance.collection('FirstDemo');
     String documentId = "nf7KvvmRa6gM59CVnx4";
     firstDemos.doc(documentId).get().then((DocumentSnapshot documentSnapshot) {
       logger.d("DocumentSnapshot documentSnapshot");
@@ -138,12 +115,8 @@ class SettingScreen extends StatelessWidget {
 
       logger.d(enneagramResult.toJson());
 
-      final enneagramResultRef = documentSnapshot.reference
-          .collection("enneagramResult")
-          .withConverter<EnneagramResult>(
-              fromFirestore: (snapshot, _) =>
-                  EnneagramResult.fromJson(snapshot.data()!),
-              toFirestore: (enneagramResult, _) => enneagramResult.toJson());
+      final enneagramResultRef = documentSnapshot.reference.collection("enneagramResult").withConverter<EnneagramResult>(
+          fromFirestore: (snapshot, _) => EnneagramResult.fromJson(snapshot.data()!), toFirestore: (enneagramResult, _) => enneagramResult.toJson());
 
       enneagramResultRef.add(enneagramResult);
     });
@@ -154,23 +127,16 @@ class SettingScreen extends StatelessWidget {
         print('documentSnapshot.id = ${documentSnapshot.id}');
         print('documentSnapshot.data() = ${documentSnapshot.data()}');
         print('documentSnapshot.get("name") = ${documentSnapshot.get("name")}');
-        print(
-            'documentSnapshot.get("description") = ${documentSnapshot.get("description")}');
+        print('documentSnapshot.get("description") = ${documentSnapshot.get("description")}');
 
-        CollectionReference secondDemos =
-            documentSnapshot.reference.collection("SecondDemo");
+        CollectionReference secondDemos = documentSnapshot.reference.collection("SecondDemo");
         String documentId2 = "51uLfULylLd6JmMxlXAQ";
-        secondDemos
-            .doc(documentId2)
-            .get()
-            .then((DocumentSnapshot documentSnapshot2) {
+        secondDemos.doc(documentId2).get().then((DocumentSnapshot documentSnapshot2) {
           if (documentSnapshot2.exists) {
             print('documentSnapshot2.metadata = ${documentSnapshot2.metadata}');
             print('documentSnapshot2.data() = ${documentSnapshot2.data()}');
-            print(
-                'documentSnapshot2.get("name") = ${documentSnapshot2.get("name")}');
-            print(
-                'documentSnapshot2.get("description") = ${documentSnapshot2.get("description")}');
+            print('documentSnapshot2.get("name") = ${documentSnapshot2.get("name")}');
+            print('documentSnapshot2.get("description") = ${documentSnapshot2.get("description")}');
           }
         });
       }

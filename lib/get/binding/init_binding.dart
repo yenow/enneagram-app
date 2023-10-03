@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
 
 import '../controller/app_controller.dart';
-import '../controller/enneagram_description_controller.dart';
 
 
 class InitBinding implements Bindings {
@@ -14,7 +13,6 @@ class InitBinding implements Bindings {
   void dependencies() {
     Get.put(AppController(), permanent: true);
     Get.put(HomeController(), permanent: true);
-    // Get.put(EnneagramDescriptionController(), permanent: true);
     Get.put(TestController());
   }
 }
