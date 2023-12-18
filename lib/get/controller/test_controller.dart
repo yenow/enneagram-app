@@ -26,7 +26,6 @@ class TestController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    logger.d("TestController init()");
   }
 
   void initDetailTest135() {
@@ -210,6 +209,6 @@ class TestController extends GetxController {
 
     AppController.to.userRef.doc(users.first.id).update(newUser.toJson());
 
-    Get.toNamed(MyRoute.root);
+    Get.toNamed(AppRoute.root);
   }
 }

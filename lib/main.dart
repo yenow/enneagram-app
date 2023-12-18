@@ -1,3 +1,4 @@
+import 'package:enneagram/constants.dart';
 import 'package:enneagram/route.dart';
 import 'package:enneagram/screens/home/home_screen.dart';
 import 'package:enneagram/theme.dart';
@@ -7,6 +8,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logger/logger.dart';
 import 'firebase_options.dart';
 import 'get/binding/init_binding.dart';
 
@@ -16,6 +18,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  Logger.level = Level.info;
   runApp(const MyApp());
 }
 
@@ -42,12 +45,10 @@ class MyApp extends StatelessWidget {
               final MediaQueryData data = MediaQuery.of(context);
               return MediaQuery(data: data.copyWith(textScaleFactor: 1.0), child: child!);
             },
-            getPages: MyRoute.getRoutes(),
+            getPages: AppRoute.getRoutes(),
             initialBinding: InitBinding(),
+            initialRoute: AppRoute.root,
             theme: theme(),
-            // darkTheme: ThemeData.dark(),
-            // themeMode: ThemeMode.dark,
-            home: const HomeScreen(),
           );
         });
   }

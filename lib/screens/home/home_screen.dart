@@ -18,41 +18,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d('build HomeScreen');
-
-    return FutureBuilder<bool>(
-        future: AppController.to.initData(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data!) {
-              return buildBody();
-            } else {
-              return const Text('error');
-            }
-          } else if (snapshot.hasError) {
-            return const Text('error');
-          }
-
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.grey,
-            ),
-          );
-        });
+    return Obx(
+      () => buildBody(),
+    );
   }
 
-  Widget buildBody() {
-    return Obx(
-      () => SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              '에니어그램',
-            ),
+  SafeArea buildBody() {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            '에니어그램',
           ),
-          drawer: CustomDrawer(enneagramType: AppController.to.user.value.enneagramResult!.enneagramType),
-          body: mainContent(),
         ),
+        drawer: CustomDrawer(enneagramType: AppController.to.user.value.enneagramResult!.enneagramType),
+        body: mainContent(),
       ),
     );
   }
@@ -61,16 +41,13 @@ class HomeScreen extends StatelessWidget {
   Container mainContent() {
     return Container(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             MyEnneagramContainer(
               enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
               wingType: AppController.to.user.value.enneagramResult!.findWingType(),
-            ),
-            SizedBox(
-              height: 10.h,
             ),
             Container(
               child: GridView.builder(
@@ -92,7 +69,7 @@ class HomeScreen extends StatelessWidget {
               height: 40.h,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.toNamed(MyRoute.enneagramIntroduction);
+                  Get.toNamed(AppRoute.enneagramIntroduction);
                 },
                 child: const Text('에니어그램이란?'),
               ),
@@ -104,7 +81,7 @@ class HomeScreen extends StatelessWidget {
               height: 40.h,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.toNamed(MyRoute.testSelectScreen);
+                  Get.toNamed(AppRoute.testSelectScreen);
                 },
                 child: const Text('에니어그램 테스트'),
               ),
@@ -121,7 +98,7 @@ class HomeScreen extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.toNamed(MyRoute.enneagramTypeDescription, arguments: index);
+        Get.toNamed(AppRoute.enneagramTypeDescription, arguments: index);
       },
       child: Container(
         margin: EdgeInsets.all(5),

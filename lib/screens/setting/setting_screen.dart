@@ -44,14 +44,14 @@ class SettingScreen extends StatelessWidget {
           divider(),
           InkWell(
             onTap: () {
-              Get.toNamed(MyRoute.teamsOfService);
+              Get.toNamed(AppRoute.teamsOfService);
             },
             child: buildListItem('공지사항'),
           ),
           divider(),
           InkWell(
             onTap: () {
-              Get.toNamed(MyRoute.teamsOfService);
+              Get.toNamed(AppRoute.teamsOfService);
             },
             child: buildListItem('이용약관 및 정책'),
           ),

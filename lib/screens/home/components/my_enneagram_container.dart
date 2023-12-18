@@ -23,10 +23,19 @@ class MyEnneagramContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppController.to.user.value.enneagramResult!.enneagramType == 0 ? Container() : myEnneagram();
+    return AppController.to.user.value.enneagramResult!.enneagramType == 0 ? noEnneagramContainer() : myEnneagramContainer();
   }
 
-  Container myEnneagram() {
+  Container noEnneagramContainer() => Container(
+    padding: EdgeInsets.symmetric(vertical: 5.h),
+    child: AutoSizeText(
+      '에니어그램 9가지 유형',
+      style: Get.textTheme.titleMedium,
+      maxLines: 1,
+    ),
+  );
+
+  Container myEnneagramContainer() {
     return Container(
       height: 140.h,
       decoration: BoxDecoration(

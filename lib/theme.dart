@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Color primaryColor = Color(0xFF998BE3);
+Color tertiary = Color(0xFFDBD6FF);
 
 ThemeData theme() {
   return ThemeData(
@@ -12,7 +13,7 @@ ThemeData theme() {
     colorScheme: ColorScheme(
       primary: primaryColor,
       onPrimary: Colors.white,
-      background: Color(0xFFD7B7FF),
+      background: Colors.white, // Color(0xFFD7B7FF),
       onBackground: Colors.white,
       secondary: Color(0xFF402572),
       onSecondary: Colors.white,
@@ -21,8 +22,10 @@ ThemeData theme() {
       surface: Colors.white,
       onSurface: Colors.black,
       brightness: Brightness.light,
+      tertiary: tertiary
     ),
-    primaryColor: Colors.deepPurple.shade100,
+    primaryColor: primaryColor,
+    backgroundColor: Colors.white,
     tabBarTheme: tabBarTheme(),
     elevatedButtonTheme: elevatedButtonThemeData(),
   );
@@ -30,13 +33,14 @@ ThemeData theme() {
 
 TabBarTheme tabBarTheme() {
   return TabBarTheme(
-      indicator: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Colors.white, width: 4),
-        ),
+    indicator: const BoxDecoration(
+      border: Border(
+        bottom: BorderSide(color: Colors.white, width: 4),
       ),
-      labelColor: Colors.white,
-      unselectedLabelColor: primaryColor);
+    ),
+    labelColor: Colors.white,
+    unselectedLabelColor: primaryColor,
+  );
 }
 
 AppBarTheme appTheme() {

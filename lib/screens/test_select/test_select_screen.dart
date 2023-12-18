@@ -48,7 +48,7 @@ class TestSelectScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ElevatedButton(
                           onPressed: () async {
-                            var result = await Get.toNamed(MyRoute.detailTestScreen, arguments: "45");
+                            var result = await Get.toNamed(AppRoute.detailTestScreen, arguments: "45");
                             logger.d('result = $result');
                             TestController.to.clearQuestions();
                           },
@@ -61,7 +61,7 @@ class TestSelectScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ElevatedButton(
                           onPressed: () async {
-                            var result = await Get.toNamed(MyRoute.detailTestScreen, arguments: "81");
+                            var result = await Get.toNamed(AppRoute.detailTestScreen, arguments: "81");
                             logger.d('result = $result');
                             TestController.to.clearQuestions();
                           },
@@ -74,7 +74,7 @@ class TestSelectScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ElevatedButton(
                           onPressed: () {
-                            Get.toNamed(MyRoute.detailTestScreen, arguments: "135");
+                            Get.toNamed(AppRoute.detailTestScreen, arguments: "135");
                             TestController.to.clearQuestions();
                           },
                           child: const Text('테스트 (135문항)')),

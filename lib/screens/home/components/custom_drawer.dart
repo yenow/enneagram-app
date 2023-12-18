@@ -20,19 +20,21 @@ class CustomDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              decoration: BoxDecoration(color: Get.theme.primaryColor),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 10),
-                  Expanded(
-                      child: EnneagramContainer(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            decoration: BoxDecoration(color: Get.theme.colorScheme.tertiary),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 10),
+                Expanded(
+                  child: EnneagramContainer(
                     shape: Shape.horizontal,
                     enneagramType: enneagramType,
-                  ))
-                ],
-              )),
+                  ),
+                )
+              ],
+            ),
+          ),
           ListTile(
             leading: const Icon(Icons.home),
             title: Text(
@@ -40,7 +42,7 @@ class CustomDrawer extends StatelessWidget {
               style: Get.textTheme.bodyMedium,
             ),
             onTap: () {
-              Get.toNamed(MyRoute.enneagramIntroduction);
+              Get.toNamed(AppRoute.enneagramIntroduction);
             },
           ),
           ExpansionTile(
@@ -54,7 +56,7 @@ class CustomDrawer extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     logger.i('tile click');
-                    Get.toNamed(MyRoute.enneagramTypeDescription, arguments: i);
+                    Get.toNamed(AppRoute.enneagramTypeDescription, arguments: i);
                   },
                   child: ListTile(
                     title: Row(
@@ -92,7 +94,7 @@ class CustomDrawer extends StatelessWidget {
               style: Get.textTheme.bodyMedium,
             ),
             onTap: () {
-              Get.toNamed(MyRoute.settingScreen);
+              Get.toNamed(AppRoute.settingScreen);
             },
           )
         ],

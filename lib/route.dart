@@ -5,14 +5,14 @@ import 'package:enneagram/screens/enneagram_type_description/enneaegram_type_des
 import 'package:enneagram/screens/home/home_screen.dart';
 import 'package:enneagram/screens/setting/page/terms_of_service_page.dart';
 import 'package:enneagram/screens/setting/setting_screen.dart';
-import 'package:enneagram/screens/splash_screen.dart';
+import 'package:enneagram/screens/splash/splash_screen.dart';
 import 'package:enneagram/screens/test/detail_test_screen.dart';
 import 'package:enneagram/screens/test_select/test_select_screen.dart';
 import 'package:get/get.dart';
 import 'get/binding/enneagram_introduction_controller_binding.dart';
 import 'get/binding/test_controller_binding.dart';
 
-class MyRoute {
+class AppRoute {
   static const String root = '/';
   static const String splashScreen = '/splashScreen';
   static const String testSelectScreen = '/testSelectScreen';
@@ -26,8 +26,7 @@ class MyRoute {
 
   static List<GetPage<dynamic>> getRoutes() {
     return [
-      GetPage(name: root, page: () => const HomeScreen()),
-      GetPage(name: splashScreen, page: () => const SplashScreen()),
+      GetPage(name: root, page: () => const SplashScreen()),
       GetPage(name: testSelectScreen, page: () => TestSelectScreen()),
       GetPage(
           name: enneagramTypeDescription,

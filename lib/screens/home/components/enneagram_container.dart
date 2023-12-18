@@ -24,52 +24,7 @@ class EnneagramContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (shape == Shape.vertical) {
-      return AppController.to.user.value.enneagramResult!.enneagramType == 0 ? buildNoTypeVerticalContainer() : buildVerticalContainer();
-    } else {
-      return AppController.to.user.value.enneagramResult!.enneagramType == 0 ? buildNoTypeHorizontalContainer() : buildHorizontalContainer();
-    }
-  }
-
-  /// 에니어그램 타입이 없을때
-  Widget buildNoTypeVerticalContainer() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Column(
-            children: [
-              Center(
-                child: Text(
-                  '나의 에니어그램은?',
-                  style: Get.theme.textTheme.headlineSmall,
-                ),
-              ),
-              SizedBox(
-                height: 220.h,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'assets/images/enneagram/pawprint.png',
-                    // color: Colors.deepPurple,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Center(
-                  child: Text(
-                '테스트를 진행해주세요!',
-                style: Get.theme.textTheme.headlineSmall,
-              ))
-            ],
-          ),
-        ],
-      ),
-    );
+    return AppController.to.user.value.enneagramResult!.enneagramType == 0 ? buildNoTypeHorizontalContainer() : buildHorizontalContainer();
   }
 
   /// 에니어그램 타입이 없을때
@@ -83,7 +38,7 @@ class EnneagramContainer extends StatelessWidget {
           flex: 2,
           child: Image.asset(
             'assets/images/enneagram/pawprint.png',
-            // color: Colors.deepPurple,
+            // color: Get.theme.colorScheme.onPrimary,
           ),
         ),
         Flexible(
@@ -105,105 +60,6 @@ class EnneagramContainer extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Container buildVerticalContainer() {
-    return Container(
-      decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Flexible(flex: 11, fit: FlexFit.loose, child: buildEnneagramVerticalContainer()),
-          const SizedBox(
-            height: 10,
-          ),
-          Flexible(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton(
-                  onPressed: () {
-                    Get.toNamed(MyRoute.enneagramDetailDescription, arguments: enneagramType);
-                  },
-                  child: const Text('자세히 알아보기')),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Column buildEnneagramVerticalContainer() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Flexible(
-            flex: 3,
-            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                return Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: AutoSizeText('나의 에니어그램유형은?', maxLines: 1, maxFontSize: 50, minFontSize: 5, style: Get.textTheme.headlineSmall));
-              },
-            )),
-        Flexible(
-            flex: 1,
-            fit: FlexFit.tight,
-            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                if (AppController.to.user.value.enneagramResults.isEmpty) {
-                  return Container();
-                }
-                return buildDateDropDown();
-              },
-            )),
-        const SizedBox(
-          width: 10,
-        ),
-        // 에니어그램 이미지
-        Flexible(
-          flex: 5,
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Image.asset(
-              enneagramMap[enneagramType]!.imageUrl,
-              // height: 70,
-              // width: 70,
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        // 애니어그램 설명
-        Flexible(flex: 3, fit: FlexFit.tight, child: buildEnneagramVerticalDescription()),
-      ],
-    );
-  }
-
-  Widget buildDateDropDown() {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: DateDropDown(
-        list: AppController.to.user.value.enneagramResults.map((e) => dateFormatter.format(e.createdAt)).toList(),
-        callback: (String date) {
-          logger.d('click date = $date');
-          EnneagramResult enneagramResult =
-              AppController.to.user.value.enneagramResults.where((element) => date == dateFormatter.format(element.createdAt)).first;
-          User newUser = User(
-              userToken: AppController.to.user.value.userToken,
-              createdAt: AppController.to.user.value.createdAt,
-              enneagramResults: AppController.to.user.value.enneagramResults,
-              enneagramResult: enneagramResult);
-          AppController.to.user(newUser);
-        },
-      ),
     );
   }
 
@@ -250,7 +106,7 @@ class EnneagramContainer extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ElevatedButton(
                 onPressed: () {
-                  Get.toNamed(MyRoute.testSelectScreen);
+                  Get.toNamed(AppRoute.enneagramTypeDescription, arguments: enneagramType);
                 },
                 // style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Get.theme.colorScheme.primary)),
                 child: Text('${enneagramMap[enneagramType]!.getName()} 알아보기')),
@@ -322,4 +178,145 @@ class EnneagramContainer extends StatelessWidget {
       ),
     );
   }
+
+  //
+
 }
+// Widget buildNoTypeVerticalContainer() {
+//   return Container(
+//     padding: const EdgeInsets.symmetric(vertical: 15),
+//     decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
+//     child: Column(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       // crossAxisAlignment: CrossAxisAlignment.stretch,
+//       children: [
+//         Column(
+//           children: [
+//             Center(
+//               child: Text(
+//                 '나의 에니어그램은?',
+//                 style: Get.theme.textTheme.headlineSmall,
+//               ),
+//             ),
+//             SizedBox(
+//               height: 220.h,
+//               child: Padding(
+//                 padding: const EdgeInsets.all(10),
+//                 child: Image.asset(
+//                   'assets/images/enneagram/pawprint.png',
+//                   // color: Colors.deepPurple,
+//                   fit: BoxFit.cover,
+//                 ),
+//               ),
+//             ),
+//             Center(
+//                 child: Text(
+//               '테스트를 진행해주세요!',
+//               style: Get.theme.textTheme.headlineSmall,
+//             ))
+//           ],
+//         ),
+//       ],
+//     ),
+//   );
+// }
+//
+// Container buildVerticalContainer() {
+//   return Container(
+//     decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
+//     child: Column(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.start,
+//       children: [
+//         Flexible(flex: 11, fit: FlexFit.loose, child: buildEnneagramVerticalContainer()),
+//         const SizedBox(
+//           height: 10,
+//         ),
+//         Flexible(
+//           flex: 1,
+//           child: Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 10),
+//             child: ElevatedButton(
+//                 onPressed: () {
+//                   Get.toNamed(MyRoute.enneagramDetailDescription, arguments: enneagramType);
+//                 },
+//                 child: const Text('자세히 알아보기')),
+//           ),
+//         ),
+//         const SizedBox(
+//           height: 10,
+//         ),
+//       ],
+//     ),
+//   );
+// }
+//
+// Column buildEnneagramVerticalContainer() {
+//   return Column(
+//     mainAxisSize: MainAxisSize.min,
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//       Flexible(
+//           flex: 3,
+//           child: LayoutBuilder(
+//             builder: (BuildContext context, BoxConstraints constraints) {
+//               return Padding(
+//                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+//                   child: AutoSizeText('나의 에니어그램유형은?', maxLines: 1, maxFontSize: 50, minFontSize: 5, style: Get.textTheme.headlineSmall));
+//             },
+//           )),
+//       Flexible(
+//           flex: 1,
+//           fit: FlexFit.tight,
+//           child: LayoutBuilder(
+//             builder: (BuildContext context, BoxConstraints constraints) {
+//               if (AppController.to.user.value.enneagramResults.isEmpty) {
+//                 return Container();
+//               }
+//               return buildDateDropDown();
+//             },
+//           )),
+//       const SizedBox(
+//         width: 10,
+//       ),
+//       // 에니어그램 이미지
+//       Flexible(
+//         flex: 5,
+//         child: Padding(
+//           padding: const EdgeInsets.all(10),
+//           child: Image.asset(
+//             enneagramMap[enneagramType]!.imageUrl,
+//             // height: 70,
+//             // width: 70,
+//           ),
+//         ),
+//       ),
+//       const SizedBox(
+//         width: 10,
+//       ),
+//       // 애니어그램 설명
+//       Flexible(flex: 3, fit: FlexFit.tight, child: buildEnneagramVerticalDescription()),
+//     ],
+//   );
+// }
+Widget buildDateDropDown() {
+  return Align(
+    alignment: Alignment.topCenter,
+    child: DateDropDown(
+      list: AppController.to.user.value.enneagramResults.map((e) => dateFormatter.format(e.createdAt)).toList(),
+      callback: (String date) {
+        logger.d('click date = $date');
+        EnneagramResult enneagramResult =
+            AppController.to.user.value.enneagramResults.where((element) => date == dateFormatter.format(element.createdAt)).first;
+        User newUser = User(
+            userToken: AppController.to.user.value.userToken,
+            createdAt: AppController.to.user.value.createdAt,
+            enneagramResults: AppController.to.user.value.enneagramResults,
+            enneagramResult: enneagramResult);
+        AppController.to.user(newUser);
+      },
+    ),
+  );
+}
+/// 에니어그램 타입이 없을때

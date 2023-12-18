@@ -41,7 +41,6 @@ class AppController extends GetxController {
   late SharedPreferences prefs;
 
   Future<void> initSharedPreferences() async {
-    logger.d('initSharedPreferences() execute');
     prefs = await SharedPreferences.getInstance();
   }
 
@@ -59,6 +58,7 @@ class AppController extends GetxController {
 
     logger.d('initUser() execute');
     String? userToken = prefs.getString('userToken');
+    userToken = 'ca5cdaa0-5d16-11ed-af3f-990da4a3018e';
 
     if (userToken == null) {
       userToken = const Uuid().v1();
@@ -73,6 +73,7 @@ class AppController extends GetxController {
 
       if (users.isNotEmpty) {
         User findUser = users.first.data();
+        logger.d(findUser);
         user(findUser);
       } else {
         userToken = const Uuid().v1();
