@@ -35,7 +35,7 @@ class AppController extends GetxController {
       .collection('user')
       .withConverter<User>(
           fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
-          toFirestore: (enneagramResult, _) => enneagramResult.toJson());
+          toFirestore: (user, _) => user.toJson());
 
   late DeviceInfo deviceInfo;
   late PackageInfo packageInfo;
@@ -57,9 +57,7 @@ class AppController extends GetxController {
   Future<void> initUser() async {
     await initSharedPreferences();
 
-    logger.d('initUser() execute');
     String? userToken = prefs.getString('userToken');
-    userToken = 'ca5cdaa0-5d16-11ed-af3f-990da4a3018e';
 
     if (userToken == null) {
       userToken = const Uuid().v1();

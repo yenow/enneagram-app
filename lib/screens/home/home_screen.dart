@@ -86,6 +86,9 @@ class HomeScreen extends StatelessWidget {
                 child: const Text('에니어그램 테스트'),
               ),
             ),
+            SizedBox(
+              height: 40.h,
+            ),
           ],
         ),
       ),

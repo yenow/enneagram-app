@@ -164,14 +164,14 @@ class TestController extends GetxController {
   /**
    * 점수 클릭시
    */
-  void clickScore(int buttonNumber) {
+  Future<void> clickScore(int buttonNumber) async {
     pageIndex(pageIndex.value + 1);
     logger.d('current index = ${pageIndex.value} ${questions.length}');
 
     if (pageIndex.value < questions.length) {
       TestController.to.pageController.nextPage(duration: duration, curve: curve);
     } else if (pageIndex.value == questions.length) {
-      completeDetailTest();
+      await completeDetailTest();
     }
   }
 
@@ -185,7 +185,7 @@ class TestController extends GetxController {
   }
 
   /// 테스트 완료시
-  void completeDetailTest() async {
+  Future<void> completeDetailTest() async {
     // check data
     for (Question question in questions) {
       if (question.score == null) {
@@ -213,21 +213,27 @@ class TestController extends GetxController {
 
     // create user
     User user = AppController.to.user.value;
-    user.enneagramResults.insert(0,enneagramResult);
-    User newUser = User(
-        userToken: user.userToken,
-        createdAt: user.createdAt,
-        enneagramResults: user.enneagramResults,
-        enneagramResult: enneagramResult);
-    AppController.to.user(newUser);
+
+    if (user.enneagramResults.isEmpty) {
+      user.enneagramResults.add(enneagramResult);
+    } else {
+      user.enneagramResult = enneagramResult;
+      user.enneagramResults.insert(0,enneagramResult);
+    }
 
     // save to firebase
+    logger.d("userToken : ${AppController.to.getUserToken()}");
     List<QueryDocumentSnapshot<User>> users = await AppController.to.userRef
         .where('userToken', isEqualTo: AppController.to.getUserToken())
         .get()
         .then((snapshot) => snapshot.docs);
 
-    AppController.to.userRef.doc(users.first.id).update(newUser.toJson());
+    if (!user.enneagramResults.isEmpty) {
+      // await AppController.to.userRef.doc(users.first.id).delete();
+      await AppController.to.userRef.doc(users.first.id).update(user.toJson());
+    } else {
+      await AppController.to.userRef.add(user);
+    }
 
     Get.toNamed(AppRoute.root);
   }

@@ -157,11 +157,11 @@ class _TestPageState extends State<TestPage> {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 7.h),
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             setState(() {
               widget.question.score = buttonNumber;
             });
-            TestController.to.clickScore(buttonNumber);
+            await TestController.to.clickScore(buttonNumber);
           },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states) {

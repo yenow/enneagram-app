@@ -73,4 +73,9 @@ class EnneagramResult {
   factory EnneagramResult.fromJson(Map<String, dynamic> json) => _$EnneagramResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$EnneagramResultToJson(this);
+
+  @override
+  String toString() {
+    return 'EnneagramResult{enneagramType: $enneagramType, questionType: $questionType, scores: $scores, createdAt: $createdAt}';
+  }
 }
