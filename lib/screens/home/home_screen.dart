@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             MyEnneagramContainer(
               enneagramType: AppController.to.user.value.enneagramResult!.enneagramType,
-              wingType: AppController.to.user.value.enneagramResult!.findWingType(),
+              // wingType: AppController.to.user.value.enneagramResult!.findWingType(),
             ),
             Container(
               child: GridView.builder(

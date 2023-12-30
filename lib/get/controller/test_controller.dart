@@ -29,6 +29,9 @@ class TestController extends GetxController {
     super.onInit();
   }
 
+  /*
+   * 초기 테스트 설정
+   */
   void initHardTest(QuestionType questionCount) {
     questions([]);
     pageIndex(0);
@@ -113,6 +116,9 @@ class TestController extends GetxController {
     pageIndex(index);
   }
 
+  /*
+   * 다음 페이지로 이동
+   */
   void goNextPage(int questionIndex) {
     Question question = questions.elementAt(pageIndex.value);
 
@@ -123,19 +129,22 @@ class TestController extends GetxController {
     } else if (question.score == null) {
       alertDialog('문항을 선택해야합니다.');
     } else {
-      pageIndex(pageIndex.value + 1);
       TestController.to.pageController.nextPage(
           duration: TestController.to.duration, curve: TestController.to.curve);
+      pageIndex(pageIndex.value + 1);
     }
   }
 
+  /*
+   * 이전 페이지로 이동
+   */
   void goPrevPage(int questionIndex) {
     if (questionIndex == 0) {
       alertDialog('첫번쨰 페이지 입니다.');
     } else {
-      pageIndex(pageIndex.value - 1);
       TestController.to.pageController.previousPage(
           duration: TestController.to.duration, curve: TestController.to.curve);
+      pageIndex(pageIndex.value - 1);
     }
   }
 
@@ -152,7 +161,9 @@ class TestController extends GetxController {
     return cnt / length;
   }
 
-  /// 답변 클릭시
+  /**
+   * 점수 클릭시
+   */
   void clickScore(int buttonNumber) {
     pageIndex(pageIndex.value + 1);
     logger.d('current index = ${pageIndex.value} ${questions.length}');
@@ -164,8 +175,12 @@ class TestController extends GetxController {
     }
   }
 
+  void onPageChanged(int index) {
+    pageIndex(index);
+    logger.d("current page index : ${index} , controller pageIndex : ${pageIndex}");
+  }
+
   void clearQuestions() {
-    logger.d('clearQuestions() execute');
     questions([]);
   }
 

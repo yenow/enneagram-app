@@ -119,12 +119,13 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  // '${widget.questionIndex + 1}',
-                  '${widget.questionIndex + 1} / ${TestController.to.questions.length}',
-                  style: Get.textTheme.titleMedium,
-                )),
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                // '${widget.questionIndex + 1}',
+                '${widget.questionIndex + 1} / ${TestController.to.questions.length}',
+                style: Get.textTheme.titleMedium,
+              ),
+            ),
             // 다음 페이지로
             IconButton(
               onPressed: () {

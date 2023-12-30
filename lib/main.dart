@@ -18,7 +18,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  Logger.level = Level.info;
+  Logger.level = Level.debug;
   runApp(const MyApp());
 }
 

@@ -24,6 +24,7 @@ class HardTestScreen extends StatelessWidget {
             ),
             body: PageView(
               controller: TestController.to.pageController,
+              onPageChanged: TestController.to.onPageChanged,
               children: TestController.to.questions.map((Question question) {
                 var index = TestController.to.questions.indexOf(question);
                 return TestPage(question: question, questionIndex: index);
