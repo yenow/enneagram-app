@@ -9,13 +9,20 @@ part 'enneagram_result.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class EnneagramResult {
-  int  enneagramType;
+  int enneagramType;
   QuestionType questionType;
   List<Score> scores;
   DateTime createdAt;
 
+  int findScoreByEnneagramType(int EnneagramType) {
+    int score = 0;
+    int index = scores.indexWhere((element) => element.enneagramType == enneagramType);
+    score = scores.elementAt(index).score;
+    return score;
+  }
+
   /// 애니어그램 타입별 총점
-  Map<int,double> findEnneagramScoreSumMap() {
+  Map<int, double> findEnneagramScoreSumMap() {
     return getEnneagramScoreSumMap(scores);
   }
 
@@ -26,13 +33,13 @@ class EnneagramResult {
 
   /// 가장 점수가 높은 유형
   int findHighestEnneagramType() {
-    Map<int,double> map = findEnneagramScoreSumMap();
+    Map<int, double> map = findEnneagramScoreSumMap();
     return getHighestEnneagramType(map);
   }
 
   /// 가장 점수가 낮은 유형
   int findLowestEnneagramType() {
-    Map<int,double> map = findEnneagramScoreSumMap();
+    Map<int, double> map = findEnneagramScoreSumMap();
 
     int enneagramType = 0;
 
@@ -40,10 +47,10 @@ class EnneagramResult {
       if (enneagramType == 0) {
         enneagramType = key;
       } else {
-
         if (map[enneagramType]! > map[key]!) {
           enneagramType = key;
-        } else if (map[enneagramType]! == map[key]!) {  // 만약 최고점수가 2개일 경우
+        } else if (map[enneagramType]! == map[key]!) {
+          // 만약 최고점수가 2개일 경우
           enneagramType = key;
         }
       }
@@ -57,7 +64,7 @@ class EnneagramResult {
       return null;
     }
 
-    Map<int,double> map = findEnneagramScoreSumMap();
+    Map<int, double> map = findEnneagramScoreSumMap();
     int enneagramType = findHighestEnneagramType();
 
     int prev = ((enneagramType - 1) % 10);
@@ -67,8 +74,12 @@ class EnneagramResult {
     return returnValue;
   }
 
-  EnneagramResult(
-      {required this.enneagramType, required this.questionType, required this.scores, required this.createdAt});
+  EnneagramResult({
+    required this.enneagramType,
+    required this.questionType,
+    required this.scores,
+    required this.createdAt,
+  });
 
   factory EnneagramResult.fromJson(Map<String, dynamic> json) => _$EnneagramResultFromJson(json);
 

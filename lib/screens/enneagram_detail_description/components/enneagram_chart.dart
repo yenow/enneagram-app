@@ -27,7 +27,7 @@ class EnneagramChart extends StatefulWidget {
 }
 
 class EnneagramChartState extends State<EnneagramChart> {
-  final Color barBackgroundColor = Colors.deepPurple.shade500; //const Color(0xff72d8bf);
+  final Color barBackgroundColor = Color(0xFF715CDC);
   final Duration animDuration = const Duration(milliseconds: 250);
 
   int touchedIndex = -1;
@@ -40,7 +40,7 @@ class EnneagramChartState extends State<EnneagramChart> {
       aspectRatio: 1,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        color: Colors.deepPurple.shade300, //const Color(0xff81e5cd),
+        color: Get.theme.colorScheme.primary,
         child: Stack(
           children: <Widget>[
             Padding(
@@ -52,7 +52,7 @@ class EnneagramChartState extends State<EnneagramChart> {
                     widget.title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,// mainColor,//const Color(0xff0f4a3c),
+                      color: Colors.white,
                       fontSize: Get.textTheme.titleMedium!.fontSize,
                     ),
                   ),
@@ -181,7 +181,7 @@ class EnneagramChartState extends State<EnneagramChart> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: (rod.toY).toString(),
+                  text: (rod.toY.toInt()).toString(),
                   style: const TextStyle(
                     color: Colors.yellow,
                     fontSize: 16,
@@ -234,42 +234,41 @@ class EnneagramChartState extends State<EnneagramChart> {
   }
 
   Widget getTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
+    TextStyle style = TextStyle(
       color: Colors.white,
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
+      fontSize: Get.textTheme.bodyMedium?.fontSize,
     );
     Widget text;
     switch (value.toInt()) {
       case 0:
-        text = const Text('1유형', style: style);
+        text = Text('1번', style: style);
         break;
       case 1:
-        text = const Text('2유형', style: style);
+        text = Text('2번', style: style);
         break;
       case 2:
-        text = const Text('3유형', style: style);
+        text = Text('3번', style: style);
         break;
       case 3:
-        text = const Text('4유형', style: style);
+        text = Text('4번', style: style);
         break;
       case 4:
-        text = const Text('5유형', style: style);
+        text = Text('5번', style: style);
         break;
       case 5:
-        text = const Text('6유형', style: style);
+        text = Text('6번', style: style);
         break;
       case 6:
-        text = const Text('7유형', style: style);
+        text = Text('7번', style: style);
         break;
       case 7:
-        text = const Text('8유형', style: style);
+        text = Text('8번', style: style);
         break;
       case 8:
-        text = const Text('9유형', style: style);
+        text = Text('9번', style: style);
         break;
       default:
-        text = const Text('', style: style);
+        text = Text('', style: style);
         break;
     }
     return SideTitleWidget(

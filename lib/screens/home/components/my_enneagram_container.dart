@@ -4,6 +4,7 @@ import 'package:enneagram/data/models/enneagram/enneagram.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/get/controller/app_controller.dart';
 import 'package:enneagram/route.dart';
+import 'package:enneagram/screens/enneagram_detail_description/components/enneagram_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -87,18 +88,37 @@ class MyEnneagramContainer extends StatelessWidget {
         Expanded(
           child: buildEnneagramHorizontalDescription(),
         ),
-        Container(
-          width: 70.w,
-          padding: EdgeInsets.only(left: 5.w, right: 5.w, top: 10.h, bottom: 20.h),
-          child: ElevatedButton(
-            child: const Text('자세히'),
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(EdgeInsets.zero),
-            ),
-            onPressed: () {},
-          ),
-        ),
+        chartButton(),
       ],
+    );
+  }
+
+  Container chartButton() {
+    return Container(
+      width: 70.w,
+      padding: EdgeInsets.only(left: 5.w, right: 5.w, top: 10.h, bottom: 20.h),
+      child: ElevatedButton(
+        child: const Text('자세히'),
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+        ),
+        onPressed: () {
+          Get.dialog(
+            transitionDuration: Duration(seconds: 1),
+            SimpleDialog(
+              backgroundColor: Colors.transparent,
+              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+              children: [
+                EnneagramChart(
+                  scoreMap: AppController.to.user.value.enneagramResult!.findEnneagramScoreSumMap(),
+                  maxScore: AppController.to.user.value.enneagramResult!.returnMaxScore(),
+                  title: '유형별 점수',
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
