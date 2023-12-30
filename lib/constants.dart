@@ -9,3 +9,5 @@ var logger = Logger(
 );
 
 final DateFormat dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
+
+final String webUrl =  'http://168.126.221.239:58000';

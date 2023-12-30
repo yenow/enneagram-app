@@ -1,3 +1,4 @@
+import 'package:enneagram/data/models/question/question_type.dart';
 import 'package:enneagram/get/controller/test_controller.dart';
 import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class TestSelectScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ElevatedButton(
                           onPressed: () async {
-                            var result = await Get.toNamed(AppRoute.detailTestScreen, arguments: "45");
+                            var result = await Get.toNamed(AppRoute.detailTestScreen, arguments: QuestionType.question45);
                             logger.d('result = $result');
                             TestController.to.clearQuestions();
                           },
@@ -61,7 +62,7 @@ class TestSelectScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ElevatedButton(
                           onPressed: () async {
-                            var result = await Get.toNamed(AppRoute.detailTestScreen, arguments: "81");
+                            var result = await Get.toNamed(AppRoute.detailTestScreen, arguments: QuestionType.question81);
                             logger.d('result = $result');
                             TestController.to.clearQuestions();
                           },
@@ -74,7 +75,7 @@ class TestSelectScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ElevatedButton(
                           onPressed: () {
-                            Get.toNamed(AppRoute.detailTestScreen, arguments: "135");
+                            Get.toNamed(AppRoute.detailTestScreen, arguments: QuestionType.question135);
                             TestController.to.clearQuestions();
                           },
                           child: const Text('테스트 (135문항)')),

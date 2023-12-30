@@ -14,22 +14,21 @@ class HardTestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // logger.d('TestController.to.questions = ${TestController.to.questions}');
     return Obx(
       () => WillPopScope(
         onWillPop: TestController.to.onWillPop,
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('정밀 테스트'),
+              title: const Text('테스트'),
             ),
             body: PageView(
-                controller: TestController.to.pageController,
-                children: TestController.to.questions.map((Question element) {
-                  var index = TestController.to.questions.indexOf(element);
-                  // TestController.to.index(index);
-                  return TestPage(question: element, questionIndex: index);
-                }).toList()),
+              controller: TestController.to.pageController,
+              children: TestController.to.questions.map((Question question) {
+                var index = TestController.to.questions.indexOf(question);
+                return TestPage(question: question, questionIndex: index);
+              }).toList(),
+            ),
           ),
         ),
       ),

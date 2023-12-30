@@ -77,7 +77,7 @@ class EnneagramTypeDescriptionScreen extends StatelessWidget {
 
   Widget buildPage(String type) {
     return EnneagramWebView(
-      url: 'http://168.126.221.239:58000/type$enneagramType/$type.html',
+      url: '${webUrl}/type$enneagramType/$type.html',
     );
   }
 }

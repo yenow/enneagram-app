@@ -30,7 +30,7 @@ class EnneagramIntroductionScreen extends StatelessWidget {
   }
 
   Widget buildBody() {
-    return const EnneagramWebView(url: 'http://168.126.221.239:58000/enneagram_introduce.html');
+    return EnneagramWebView(url: '${webUrl}/enneagram_introduce.html');
   }
 
   // Padding buildBody() {

@@ -54,9 +54,7 @@ class _TestPageState extends State<TestPage> {
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 1),
-                        borderRadius: const BorderRadius.all(Radius.circular(10))),
+                    decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1), borderRadius: const BorderRadius.all(Radius.circular(10))),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -81,101 +79,105 @@ class _TestPageState extends State<TestPage> {
 
   Flexible buildQuestion() {
     return Flexible(
-        fit: FlexFit.tight,
-        flex: 5,
-        child: Container(
-          // alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-          child: Text(
-            '${widget.questionIndex + 1}. ${widget.question.question}',
-            style: TextStyle(
-              fontSize: Get.textTheme.titleSmall!.fontSize,
-              height: 1.4
-            ),
-          ),
-        ));
+      fit: FlexFit.tight,
+      flex: 5,
+      child: Container(
+        // alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+        child: Text(
+          '${widget.questionIndex + 1}. ${widget.question.question}',
+          style: TextStyle(fontSize: Get.textTheme.titleSmall!.fontSize, height: 1.4),
+        ),
+      ),
+    );
   }
 
   Flexible buildHeader() {
     return Flexible(
-        fit: FlexFit.tight,
-        flex: 1,
-        child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                onPressed: () {
-                  TestController.to.goPrevTenPage();
-                },
-                icon: const Icon(
-                  Icons.undo,
-                  color: Colors.grey,
-                ),
+      fit: FlexFit.tight,
+      flex: 1,
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: () {
+                TestController.to.goPrevTenPage();
+              },
+              icon: const Icon(
+                Icons.undo,
+                color: Colors.grey,
               ),
-              IconButton(
-                onPressed: () {
-                  TestController.to.goPrevPage(widget.questionIndex);
-                },
-                icon: const Icon(
-                  Icons.west,
-                  color: Colors.grey,
-                ),
+            ),
+            IconButton(
+              onPressed: () {
+                TestController.to.goPrevPage(widget.questionIndex);
+              },
+              icon: const Icon(
+                Icons.west,
+                color: Colors.grey,
               ),
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    // '${widget.questionIndex + 1}',
-                    '${widget.questionIndex + 1} / ${TestController.to.questions.length}',
-                    style: Get.textTheme.titleMedium,
-                  )),
-              // 다음 페이지로
-              IconButton(
-                onPressed: () {
-                  TestController.to.goNextPage(widget.questionIndex);
-                },
-                icon: const Icon(
-                  Icons.east,
-                  color: Colors.grey,
-                ),
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  // '${widget.questionIndex + 1}',
+                  '${widget.questionIndex + 1} / ${TestController.to.questions.length}',
+                  style: Get.textTheme.titleMedium,
+                )),
+            // 다음 페이지로
+            IconButton(
+              onPressed: () {
+                TestController.to.goNextPage(widget.questionIndex);
+              },
+              icon: const Icon(
+                Icons.east,
+                color: Colors.grey,
               ),
-              IconButton(
-                onPressed: () {
-                  TestController.to.goNextTenPage();
-                },
-                icon: const Icon(
-                  Icons.redo,
-                  color: Colors.grey,
-                ),
+            ),
+            IconButton(
+              onPressed: () {
+                TestController.to.goNextTenPage();
+              },
+              icon: const Icon(
+                Icons.redo,
+                color: Colors.grey,
               ),
-            ],
-          );
-        }));
+            ),
+          ],
+        );
+      }),
+    );
   }
 
   Flexible buildFlexibleButton(int buttonNumber) {
     return Flexible(
-        flex: 1,
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 7.h),
-          child: ElevatedButton(
-            onPressed: () {
-              setState(() {
-                widget.question.score = buttonNumber;
-              });
-              TestController.to.clickScore(buttonNumber);
-            },
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith((states) {
+      flex: 1,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 7.h),
+        child: ElevatedButton(
+          onPressed: () {
+            setState(() {
+              widget.question.score = buttonNumber;
+            });
+            TestController.to.clickScore(buttonNumber);
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith((states) {
               // Question elementAt = TestController.to.questions.elementAt(widget.questionIndex);
               if (widget.question.score == buttonNumber) {
                 logger.d('widget.question.score = ${widget.question.score}');
                 return Get.theme.colorScheme.secondary;
               }
               return Get.theme.elevatedButtonTheme.style!.backgroundColor!.resolve(states);
-            })),
-            child: Text(getButtonString(buttonNumber)),
+            }),
           ),
-        ));
+          child: Text(
+            getButtonString(buttonNumber),
+          ),
+        ),
+      ),
+    );
   }
 
   String getButtonString(int buttonNumber) {

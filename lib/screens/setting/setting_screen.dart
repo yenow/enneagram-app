@@ -9,6 +9,7 @@ import '../../constants.dart';
 import '../../data/models/enneagram_result/enneagram_result.dart';
 import '../../data/models/enneagram_result/score.dart';
 import '../../data/models/question/question.dart';
+import '../../data/models/question/question_type.dart';
 import '../../get/controller/app_controller.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -106,7 +107,7 @@ class SettingScreen extends StatelessWidget {
 
       EnneagramResult enneagramResult = EnneagramResult(
           enneagramType: 1,
-          questionType: QuestionType.detail135,
+          questionType: QuestionType.question135,
           scores: [
             Score(enneagramType: 1, score: 1),
             Score(enneagramType: 2, score: 2),

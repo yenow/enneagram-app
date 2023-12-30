@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enneagram/constants.dart';
 import 'package:enneagram/data/models/enneagram_result/enneagram_result.dart';
 import 'package:enneagram/data/models/question/question.dart';
+import 'package:enneagram/data/models/question/question_type.dart';
 import 'package:enneagram/route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,22 +29,26 @@ class TestController extends GetxController {
     super.onInit();
   }
 
-  void initDetailTest135() {
-    logger.d("initDetailTest135()");
-    detailTest_135Questions.shuffle();
-    questions.addAll(detailTest_135Questions);
-  }
+  void initHardTest(QuestionType questionCount) {
+    questions([]);
+    pageIndex(0);
 
-  void initDetailTest81() {
-    logger.d("initDetailTest81()");
-    detailTest_81Questions.shuffle();
-    questions.addAll(detailTest_81Questions);
-  }
+    switch (questionCount) {
+      case QuestionType.question45 :
+        detailTest_45Questions.shuffle();
+        questions.addAll(detailTest_45Questions);
+        break;
+      case QuestionType.question81 :
+        detailTest_81Questions.shuffle();
+        questions.addAll(detailTest_81Questions);
+        break;
+      case QuestionType.question135 :
+        detailTest_135Questions.shuffle();
+        questions.addAll(detailTest_135Questions);
+        break;
+      default :
 
-  void initDetailTest45() {
-    logger.d("initDetailTest45()");
-    detailTest_45Questions.shuffle();
-    questions.addAll(detailTest_45Questions);
+    }
   }
 
   Future<bool> onWillPop() async {

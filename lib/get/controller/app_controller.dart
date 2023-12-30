@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../common/function/device_info_function.dart';
 import '../../constants.dart';
+import '../../data/models/question/question_type.dart';
 import '../../data/models/user/user.dart';
 
 class AppController extends GetxController {
@@ -18,13 +19,13 @@ class AppController extends GetxController {
           enneagramResult: EnneagramResult(
               enneagramType: 0,
               scores: [],
-              questionType: QuestionType.detail45,
+              questionType: QuestionType.question45,
               createdAt: DateTime.now()),
           enneagramResults: [
             EnneagramResult(
                 enneagramType: 0,
                 scores: [],
-                questionType: QuestionType.detail45,
+                questionType: QuestionType.question45,
                 createdAt: DateTime.now())
           ],
           createdAt: DateTime.now())
@@ -90,7 +91,7 @@ class AppController extends GetxController {
       enneagramResult: EnneagramResult(
           enneagramType: 0,
           scores: [],
-          questionType: QuestionType.detail45,
+          questionType: QuestionType.question45,
           createdAt: DateTime.now()),
       enneagramResults: [],
     );

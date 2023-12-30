@@ -2,6 +2,7 @@ import 'package:enneagram/data/models/question/question.dart';
 import 'package:enneagram/data/models/enneagram_result/score.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../question/question_type.dart';
 import 'enneagram_result_function.dart';
 
 part 'enneagram_result.g.dart';

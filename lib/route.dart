@@ -6,9 +6,10 @@ import 'package:enneagram/screens/home/home_screen.dart';
 import 'package:enneagram/screens/setting/page/terms_of_service_page.dart';
 import 'package:enneagram/screens/setting/setting_screen.dart';
 import 'package:enneagram/screens/splash/splash_screen.dart';
-import 'package:enneagram/screens/test/detail_test_screen.dart';
+import 'package:enneagram/screens/test/hard_test_screen.dart';
 import 'package:enneagram/screens/test_select/test_select_screen.dart';
 import 'package:get/get.dart';
+import 'data/models/question/question_type.dart';
 import 'get/binding/enneagram_introduction_controller_binding.dart';
 import 'get/binding/test_controller_binding.dart';
 
@@ -47,14 +48,8 @@ class AppRoute {
       GetPage(
         name: detailTestScreen,
         page: () {
-          var data = Get.arguments;
-          if (data == "81") {
-            TestController.to.initDetailTest81();
-          } else if (data == "45") {
-            TestController.to.initDetailTest45();
-          } else if (data == "135") {
-            TestController.to.initDetailTest135();
-          }
+          QuestionType questionCount = Get.arguments;
+          TestController.to.initHardTest(questionCount);
           return HardTestScreen(list: TestController.to.questions);
         },
         binding: TestControllerBinding(),
